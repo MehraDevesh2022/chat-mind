@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import ChatPage from "./Pages/ChatPage";
-
+import "./app.css"
 
 function App() {
   return (
