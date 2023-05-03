@@ -11,9 +11,9 @@ const useStyles = makeStyles((theme) => ({
     width: "350px",
     margin: "auto",
     borderRadius: "5px",
-    //   alignContent : "center",
+      alignContent : "center",
     padding: "2rem",
-    // backgroundColor: "#28293D",
+    
   },
 
   heading: {

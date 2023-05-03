@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import SignupForm from "../component/user/Register";
 import LoginForm from "../component/user/SignIn";
-
+import './Home.css'
 function HomePage() {
   const location = useLocation();
 

@@ -5,7 +5,6 @@ import {
   Checkbox,
   Button,
   Typography,
-  Link,
   Grid,
   Avatar,
 } from "@material-ui/core";
@@ -13,6 +12,7 @@ import useStyles from "./LoginFromStyle";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { Link } from "react-router-dom";
 
 export default function LoginForm() {
   const classes = useStyles();
@@ -86,7 +86,7 @@ export default function LoginForm() {
             />
           </Grid>
           <Grid item>
-            <Link href="#" className={classes.forgotPasswordLink}>
+            <Link to="/forgot/password" className={classes.forgotPasswordLink}>
               Forgot your password?
             </Link>
           </Grid>
@@ -94,7 +94,7 @@ export default function LoginForm() {
         <Typography variant="body2" className={classes.termsAndConditionsText}>
           I accept the <b>ChatMind</b> Terms of Use and acknowledge{" "}
           <b>ChatMind</b> will use my information in accordance with its
-          <Link href="#" className={classes.privacyText}>
+          <Link to="/" className={classes.privacyText}>
             Privacy Policy.
           </Link>
         </Typography>
@@ -112,7 +112,7 @@ export default function LoginForm() {
           style={{ marginTop: "1rem" }}
         >
           Don't have an account?
-          <Link href="#" className={classes.createAccount}>
+          <Link to ="/signup" className={classes.createAccount}>
             Create Account
           </Link>
         </Typography>

@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 
+
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./LoginFromStyle";
 import Visibility from "@mui/icons-material/Visibility";
@@ -183,7 +184,7 @@ function SignupForm() {
         <Typography variant="body2" className={classes.termsAndConditionsText}>
           I acknowledge Cricket Weapon will use my information in accordance
           with its
-          <Link href="#" className={classes.privacyText}>
+          <Link to="/" className={classes.privacyText}>
             Privacy Policy.
           </Link>
         </Typography>
@@ -201,7 +202,7 @@ function SignupForm() {
           style={{ marginTop: "1rem" }}
         >
           Already have an account?
-          <Link href="#" className={classes.createAccount}>
+          <Link to="/login" className={classes.createAccount}>
             Login
           </Link>
         </Typography>
