@@ -13,7 +13,7 @@ function HomePage() {
           <div className="navbar-logo">ChatMind</div>
           <div className="navbar-menu">
             <div className="navbar-item">
-              {location.pathname !== "/login"
+              {location.pathname === "/login"
                 ? "Ready to ChatMind? Let's Login"
                 : "Join the ChatMind community !"}
             </div>

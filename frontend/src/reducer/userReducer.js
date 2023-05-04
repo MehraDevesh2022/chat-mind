@@ -33,8 +33,8 @@ export const createUserReducer = (state = { user: {} }, action) => {
         ...state,
         loading: false,
         isAuthenticated: false,
-        error: action.paylaod,
         user: null,
+        error: action.payload,
       };
     case CLEAR_ERRORS:
       return {

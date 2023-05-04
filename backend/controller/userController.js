@@ -1,20 +1,20 @@
 const asyncWrapper = require("../middleWare/asyncWrapper");
 const UserModel = require("../model/UserModel");
 const sendJwtToekn = require("../appUtills/jwtToken");
-// const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary");
 const ErrorHandler = require("../appUtills/error");
  
  
 // >>>>> Create User Api <<<<<<<<< 
 exports.registerUser = asyncWrapper(async (req, res, next) => {
-  //    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-  //      folder: "profile",
-  //      width: 150,
-  //      crop: "scale",
-  //    });
+     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+       folder: "profile",
+       width: 150,
+       crop: "scale",
+     });
 
-  //    console.log(myCloud.public_id);
-  //    console.log(myCloud.secure_url);
+     console.log(myCloud.public_id);
+     console.log(myCloud.secure_url);
  
 
   const { name, email, password } = req.body;
@@ -33,6 +33,10 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
     name,
     password,
     email,
+    avatar: {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    },
   });
 
   if (user) {

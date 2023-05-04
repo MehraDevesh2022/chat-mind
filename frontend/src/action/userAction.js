@@ -37,6 +37,7 @@ export const loginUser = (email, password) => async (dispatch) => {
     );
     dispatch({ type: LOGIN_USER_SUCCESS, payload: data.user });
   } catch (error) {
+    console.log("hello");
     dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
   }
 };
