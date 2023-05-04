@@ -1,7 +1,7 @@
 import {
-  REGITER_USER_REQUEST,
-  REGITER_USER_SUCCESS,
-  REGITER_USER_FAIL,
+  REGISTER_USER_REQUEST,
+  REGISTER_USER_SUCCESS,
+  REGISTER_USER_FAIL,
   CLEAR_ERRORS,
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
@@ -10,28 +10,31 @@ import {
 
 export const createUserReducer = (state = { user: {} }, action) => {
   switch (action.type) {
-    case REGITER_USER_REQUEST:
+    case REGISTER_USER_REQUEST:
     case LOGIN_USER_REQUEST:
       return {
         loading: true,
-        isAutenticated: false,
+        isAuthenticated: false,
         ...state,
       };
-    case REGITER_USER_SUCCESS:
+
+    case REGISTER_USER_SUCCESS:
     case LOGIN_USER_SUCCESS:
       return {
+     
         loading: false,
-        user: action.paylaod,
-        isAutenticated: true,
+        isAuthenticated: true,
+        user: action.payload,
       };
-    case REGITER_USER_FAIL:
+
+    case REGISTER_USER_FAIL:
     case LOGIN_USER_FAIL:
       return {
+        ...state,
         loading: false,
-        isAutenticated: false,
+        isAuthenticated: false,
         error: action.paylaod,
         user: null,
-        ...state,
       };
     case CLEAR_ERRORS:
       return {

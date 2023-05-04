@@ -1,12 +1,12 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+const cookieParser = require("cookie-parser");  
 const connectDB = require("../backend/db/connectDB");
 const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 const errorMiddleware = require("./middleWare/errorHandler");
-
+const fileUpload = require("express-fileupload");
 
 // routes 
 const userRoute  = require("./route/userRoute"); 
@@ -15,8 +15,9 @@ const userRoute  = require("./route/userRoute");
 dotenv.config();
 app.use(cookieParser());
 app.use(express.json());
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(fileUpload());
 app.use(errorMiddleware);
 
 

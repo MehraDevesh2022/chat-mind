@@ -7,7 +7,7 @@ import { createUserReducer } from "./reducer/userReducer";
 
 const rootReducer = combineReducers({
 
-    UserAuth  : createUserReducer, 
+    UserData  : createUserReducer, 
 })
 
 

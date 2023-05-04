@@ -22,8 +22,9 @@ function HomePage() {
       </nav>
       <div className="home_page">
         <div className="Home_container">
-          {location.pathname !== "/login" ? <LoginForm /> : <SignupForm />}
+          {location.pathname === "/login" ? <LoginForm /> : <SignupForm />}
         </div>
+
       </div>
     </>
   );

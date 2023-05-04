@@ -3,8 +3,9 @@ const UserModel = require("../model/UserModel");
 const sendJwtToekn = require("../appUtills/jwtToken");
 // const cloudinary = require("cloudinary");
 const ErrorHandler = require("../appUtills/error");
-
-// >>>>> Create User Api <<<<<<<<<
+ 
+ 
+// >>>>> Create User Api <<<<<<<<< 
 exports.registerUser = asyncWrapper(async (req, res, next) => {
   //    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
   //      folder: "profile",
@@ -14,6 +15,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
 
   //    console.log(myCloud.public_id);
   //    console.log(myCloud.secure_url);
+ 
 
   const { name, email, password } = req.body;
 
@@ -22,7 +24,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
   }
 
   const userExits = await UserModel.findOne({ email });
-
+ 
   if (userExits) {
     return next(new ErrorHandler("User already exists", 400));
   }

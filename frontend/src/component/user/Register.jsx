@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Button,
@@ -9,15 +9,21 @@ import {
   Typography,
 } from "@material-ui/core";
 
-
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./LoginFromStyle";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Link } from "react-router-dom";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import { useSelector, useDispatch } from "react-redux";
+import { clearError, createUser } from "../../action/userAction";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
 
 function SignupForm() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+const alert  = useAlert();
   const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
@@ -25,31 +31,18 @@ function SignupForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
-  //  const [avatar, setAvatar] = useState(profile);
+  const [avatar, setAvatar] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [avatarPreview, setAvatarPreview] = useState("");
 
-  const handleEmailChange = (event) => {
-    const newEmail = event.target.value;
-    setEmail(newEmail);
-    setIsValidEmail(
-      newEmail !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)
-    );
-  };
-
-  const handleAvatarChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        setAvatarPreview(reader.result);
-      };
-    }
-  };
-
+  const { error, isAuthenticated, loading } = useSelector(
+    (state) => state.UserData
+  );
+  // <<<<< form handlers >>>>>>>
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
+
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
@@ -61,6 +54,29 @@ function SignupForm() {
     setShowPassword(!showPassword);
   };
 
+  const handleEmailChange = (event) => {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+    setIsValidEmail(
+      newEmail !== "" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)
+    );
+  };
+
+  const handleAvatarChange = (e) => {
+    setIsLoading(true);
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        setAvatarPreview(reader.result);
+        setAvatar(reader.result);
+        setIsLoading(false);
+      };
+    }
+  };
+
   const isSignInDisabled = !(
     email &&
     password &&
@@ -68,10 +84,32 @@ function SignupForm() {
     confirmPassword &&
     name
   );
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const myForm = new FormData();
+    myForm.set("name", name);
+    myForm.set("password", password);
+    myForm.set("email", email);
+    myForm.set("avatar", avatar);
+ 
+    dispatch(createUser(myForm));
+  };
 
+  useEffect(() => {
+    console.log(isAuthenticated);
+    if (error) {
+       alert.error(error)
+      dispatch(clearError());
+    }
+    if (isAuthenticated) {
+         alert.success("Welcome to ChatMind !");
+      history.push("/login");
+    }
+  }, [error, isAuthenticated, history, loading, dispatch]);
+ 
   return (
     <div className={classes.formContainer}>
-      <form className={classes.form}>
+      <form className={classes.form} onSubmit={handleFormSubmit}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
@@ -193,6 +231,7 @@ function SignupForm() {
           className={classes.loginButton}
           fullWidth
           disabled={isSignInDisabled}
+          onClick={handleFormSubmit}
         >
           Create Account
         </Button>
