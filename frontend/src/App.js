@@ -3,19 +3,27 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import HomePage from "./Pages/HomePage";
 import ChatPage from "./Pages/ChatPage";
 import "./app.css"
-
+import ForgetPassowrd from "./component/user/ForgotPassword";
+import SignupForm from "./component/user/Register";
+import LoginForm from "./component/user/SignIn";
 function App() {
   return (
     <>
       <Router>
-          <Switch>
-        <Route path="/">
-          <HomePage />
-        </Route>
+        <HomePage />
+        <Switch>
+          <Route exact path="/">
+            <SignupForm />
+          </Route>
+          <Route exact path="/login">
+            <LoginForm />
+          </Route>
+          <Route exact path="/forgot/password">
+            <ForgetPassowrd />
+          </Route>
 
-      
           <Route exact path="/chat">
-            <ChatPage/>
+            <ChatPage />
           </Route>
         </Switch>
       </Router>
