@@ -57,6 +57,7 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.getJwtToken = function () {
   //  payLoad : => Toeknexpiry , userId , or Seceret key, Along with header has algo name , type of JWT
+
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
