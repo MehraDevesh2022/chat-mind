@@ -146,3 +146,36 @@ exports.removeFromGroup  = asyncWrapper(async( req  , res  , next) =>{
 // @route   PUT /api/v1/chat/groupadd
 // @access  Protected
 
+exports.addToGroup  = asyncWrapper( async ( req , res , next) =>{
+
+  const { userId, chatId } = req.body;
+
+  if (!userId || !chatId) {
+    return next(new ErrorHandler("Please Fill all the feilds", 400));
+  }
+
+    const addUser = await chatModel
+      .findByIdAndUpdate(
+        chatId,
+        {
+          $push: {users : userId}, // adding in users array in groupChat model
+        },
+        {
+          new: true,
+        }
+      )
+      .populate("users", "-password")
+      .populate("groupAdmin", "-password");
+
+
+    if(!addUser){
+          return next(new ErrorHandler("Chat not found", 404));
+    }else{
+
+      res.status(200).json({
+        success : true,
+        chatData : addUser
+      })
+    }
+
+})
