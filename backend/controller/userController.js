@@ -5,6 +5,37 @@ const cloudinary = require("cloudinary");
 const ErrorHandler = require("../appUtills/error");
  
  
+
+//>>>>>>get all search user expect this user <<<<<<<<<
+
+exports.allSearchUser = asyncWrapper(async (req, res) => {
+  // Get the search keyword from the query parameter, if present
+  const keyword = req.query.search
+    ? {
+        $or: [
+          {
+            name: { $regex: req.query.search, $options: "i" }, // search by name (case-insensitive)
+          },
+          {
+            email: { $regex: req.query.search, $options: "i" }, // search by email (case-insensitive)
+          },
+        ],
+      }
+    : {};
+
+  // Find all users that match the search criteria, excluding[$ne: not equals] the currently logged-in user (req.user)
+  const users = await UserModel.find(keyword).find({
+    _id: { $ne: req.user._id },
+  });
+
+  // Send the list of matching users in the response
+  res.status(200).json({
+    success: true,
+    users: users,
+  });
+});
+
+
 // >>>>> Create User Api <<<<<<<<< 
 exports.registerUser = asyncWrapper(async (req, res, next) => {
      const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
