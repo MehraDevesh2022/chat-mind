@@ -106,3 +106,43 @@ exports.createGroupChat  = asyncWrapper(async( req , res  , next) =>{
 
 
 })
+
+// @desc    Remove user from Group
+// @route   PUT /api/v1/chat/groupremove
+// @access  Protected
+
+
+exports.removeFromGroup  = asyncWrapper(async( req  , res  , next) =>{
+  const { chatId, userId } = req.body;
+
+  if (!chatId || !userId) {
+    return next(new ErrorHandler("Please Fill all the feilds", 400));
+  }
+
+  const removed = await chatModel
+    .findByIdAndUpdate(chatId, {
+      $pull: { users: userId }, // pull the user fro users array in groupchat
+    })
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password");
+   
+
+    if(!removed){
+     return next(new ErrorHandler("Chat not found" , 404))
+
+    }else{
+     res.status(200).json({
+      success : true ,
+       chatData  : removed
+     });
+
+    }
+
+})
+
+
+
+// @desc    Add user to Group / Leave
+// @route   PUT /api/v1/chat/groupadd
+// @access  Protected
+
