@@ -214,3 +214,33 @@ const updateChat = await chatModel
   }
 
 })
+
+//@description     Fetch all chats for a user
+//@route           GET /api/chat/
+//@access          Protected
+
+exports.getAllChats  =  asyncWrapper( async (req , res , next) =>{
+  const userID = req.user._id;
+
+  const chats = await chatModel
+    .find({
+      users: { $elemMatch: { $eq: userID } },
+    })
+    .populate("users", "-password")
+    .populate("groupAdmin", "-password")
+    .populate("latestMessage")
+    .sort({ updatedAt: -1 }); // message latestMessage will send by latest updatedAt
+
+
+    const result = await userModel.populate(chats, {
+  path: "latestMessage.sender",
+  select: "name pic email",
+});
+  res.status(200).json({
+    success : true,
+    chatData : result
+  })
+
+  })
+
+
