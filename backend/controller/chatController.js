@@ -179,3 +179,38 @@ exports.addToGroup  = asyncWrapper( async ( req , res , next) =>{
     }
 
 })
+
+// @desc    Rename Group
+// @route   PUT /api/chat/rename
+// @access  Protected
+exports.renameGroup = asyncWrapper( async (req , res , next) =>{
+
+const {chatId , chatName}  = req.body;
+
+const updateChat = await chatModel
+  .findByIdAndUpdate(
+    chatId,
+    {
+      chatName: chatName,
+    },
+    {
+      new: true,
+    }
+  )
+  .populate("users", "-password")
+  .populate("groupAdmin", "-password");
+
+
+  if(!updateChat){
+       return next(new ErrorHandler("Chat not found", 404));
+  }else{
+     res.status(200).json({
+
+        success : true ,
+        chatData  : updateChat
+
+     })
+
+  }
+
+})
