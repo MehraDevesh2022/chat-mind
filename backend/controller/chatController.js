@@ -33,7 +33,7 @@ console.log(req.body);
   if (isChat.length > 0) {
     res.status(200).json({
       success: true,
-      chat: isChat[0],
+      ChatData: isChat[0],
     });
   } else {
     const chatData = {
@@ -45,12 +45,12 @@ console.log(req.body);
     try {
       const createdChat = await chatModel.create(chatData);
       const fullChat = await chatModel
-        .findOne({ _id: createdChat._id }) // findChat with chatId that created
+        .findOne({ _id: createdChat._id }) // find Chat with chatId that created
         .populate("users", "-password"); // get all deatils of users those are commnicating
 
       res.status(200).json({
         success: true,
-        chat: fullChat,
+        ChatData: fullChat,
       });
     } catch (error) {
         console.log(error ,"error");
@@ -60,3 +60,49 @@ console.log(req.body);
 });
 
 
+//@description     Create New Group Chat
+//@route           POST /api/v1/chat/group
+//@access          Protected
+
+exports.createGroupChat  = asyncWrapper(async( req , res  , next) =>{
+ 
+
+    if (!req.body.users || !req.body.name) {
+    return next(new ErrorHandler("Please Fill all the feilds", 400));
+  }
+
+  let users = JSON.parse(req.body.users); //  JSON string into a JavaScript object.
+    
+  if(users.length < 2){
+      return next(
+        new ErrorHandler("More than 2 users are required to form a group chat" , 400)
+      ); 
+  }
+
+         // add logged user or who is looged in into group as well beacuse he is cerating group thoug  he will admin as well.
+      users.push(req.user);
+
+  try {
+       const groupChat = await chatModel.create({
+         chatName: req.body.name,
+         users: users,
+         isGroupChat: true,
+         groupAdmin: req.user,
+       });
+
+       const fullGroupChat = await chatModel
+         .findOne({ _id: groupChat._id })
+         .populate("users", "-password")
+         .populate("groupAdmin", "-password");
+
+           res.status(201).json({
+             success: true,
+             chatData: fullGroupChat,
+           });
+
+  } catch (error) {
+      return next(new ErrorHandler(error.message , 400))
+  }
+
+
+})

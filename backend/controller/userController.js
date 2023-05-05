@@ -38,7 +38,9 @@ exports.allSearchUser = asyncWrapper(async (req, res) => {
 
 // >>>>> Create User Api <<<<<<<<< 
 exports.registerUser = asyncWrapper(async (req, res, next) => {
-     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    
+   console.log(req.body);
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
        folder: "profile",
        width: 150,
        crop: "scale",
