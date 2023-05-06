@@ -3,6 +3,7 @@ const UserModel = require("../model/UserModel");
 const sendJwtToekn = require("../appUtills/jwtToken");
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../appUtills/error");
+const userModel = require("../model/UserModel");
  
  
 
@@ -117,3 +118,15 @@ res.status(200).json({
 
 })
 
+
+
+exports.loadUser = asyncWrapper (async( req , res) =>{
+
+
+  const user = await  userModel.findById(req.user._id);
+
+  res.status(200).json({
+    success: true,
+    user, // profile details of user
+  });
+})
