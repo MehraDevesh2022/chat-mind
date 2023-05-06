@@ -101,3 +101,19 @@ exports.loginController = asyncWrapper(async (req, res, next) => {
     return next(new ErrorHandler("Invalid email or password", 401));
   }
 });
+
+
+exports.logoutUser = asyncWrapper(async (req , res) =>{
+
+      req.cookies("token", null, {
+        expires: new Date(Date.now()),
+        httpOnly: true,
+      });
+
+res.status(200).json({
+ success : true ,
+    message : "User logged out"
+  })
+
+})
+
