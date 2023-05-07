@@ -11,7 +11,7 @@ const fileUpload = require("express-fileupload");
 // routes 
 const userRoute  = require("./route/userRoute"); 
 const chatRuote  = require('./route/chatRoute');
-
+const messageRoute  = require("./route/messageRoutes")
 dotenv.config();
 app.use(cookieParser());
 app.use(express.json());
@@ -24,6 +24,7 @@ app.use(errorMiddleware);
 
 app.use("/api/v1/user" , userRoute);
 app.use("/api/v1/chat" , chatRuote);
+app.use("/api/v1/message" , messageRoute);
 
 // conncet with cloudinary
 cloudinary.config({
