@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 
-router.route("/").post(authentication, getCreateChatController).post(authentication , getAllChats)
+router.route("/").post(authentication, getCreateChatController).get(authentication , getAllChats)
  router.route("/create/group").post(authentication , createGroupChat)
 router.route("/remove/group").post(authentication, removeFromGroup);
 router.route("/add/group").post(authentication , addToGroup); 

@@ -106,15 +106,20 @@ exports.loginController = asyncWrapper(async (req, res, next) => {
 
 exports.logoutUser = asyncWrapper(async (req , res) =>{
 
-      req.cookies("token", null, {
-        expires: new Date(Date.now()),
-        httpOnly: true,
-      });
+   
 
-res.status(200).json({
- success : true ,
-    message : "User logged out"
-  })
+   const options = {
+     expires: new Date(
+       Date.now()
+     ), 
+     httpOnly: true,
+   };
+
+   res.status(200).cookie("token", null, options).json({
+     success: true,
+     message : "Loged out successfully"
+   });
+
 
 })
 
