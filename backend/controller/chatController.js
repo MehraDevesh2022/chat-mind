@@ -9,7 +9,7 @@ const userModel = require("../model/UserModel");
 
 exports.getCreateChatController = asyncWrapper(async (req, res, next) => {
   const { userId } = req.body;
-console.log(req.body);
+
   if (!userId) {
     return next(new ErrorHandler("UserId param not sent with request", 400));
   }
@@ -121,7 +121,7 @@ exports.removeFromGroup  = asyncWrapper(async( req  , res  , next) =>{
 
   const removed = await chatModel
     .findByIdAndUpdate(chatId, {
-      $pull: { users: userId }, // pull the user fro users array in groupchat
+      $pull: { users: userId }, // pull the user froM users array in groupchat
     })
     .populate("users", "-password")
     .populate("groupAdmin", "-password");

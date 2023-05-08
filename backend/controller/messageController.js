@@ -40,10 +40,10 @@ exports.sendMessage = asyncWrapper(async (req, res, next) => {
     chat: chatId,
   };
 
-  const message = await messageModel.create(newMessage);
+  let message = await messageModel.create(newMessage);
   message = await message.populate("sender", "name pic");
   message = await message.populate("chat");
-  message = await User.populate(message, {
+  message = await userModel.populate(message, {
     path: "chat.users",
     select: "name pic email",
   });
