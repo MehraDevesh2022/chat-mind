@@ -9,7 +9,7 @@ function HomePage() {
     <>
       <nav className="navbar">
         <div className="navbar-container">
-          <Link to="/">
+          <Link to="#">
        
             <div className="navbar-logo">ChatMind</div>
           </Link>

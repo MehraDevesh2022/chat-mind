@@ -27,7 +27,6 @@ export const createUserReducer = (state = { user: {} }, action) => {
 
     case REGISTER_USER_SUCCESS:
     case LOGIN_USER_SUCCESS:
-
     case LOAD_USER_SUCCESS:
       return {
         loading: false,
@@ -37,7 +36,6 @@ export const createUserReducer = (state = { user: {} }, action) => {
 
     case REGISTER_USER_FAIL:
     case LOGIN_USER_FAIL:
-
     case LOAD_USER_FAIL:
       return {
         ...state,
@@ -76,7 +74,7 @@ export const logoutUserReducer = (state = {}, action) => {
     case LOGOUT_USER_FAIL:
       return {
         ...state,
-        loading: false,
+        loading: false,  
         error: action.payload,
       };
     case CLEAR_ERRORS:
