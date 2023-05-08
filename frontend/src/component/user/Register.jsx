@@ -8,7 +8,7 @@ import {
   Grid,
   Typography,
 } from "@material-ui/core";
-
+import HomePage from "../../Pages/HomePage";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./LoginFromStyle";
 import Visibility from "@mui/icons-material/Visibility";
@@ -121,6 +121,7 @@ const alert  = useAlert();
         <Loader />
       ) : (
         <>
+           <HomePage/>
           <div className={classes.formContainer}>
             <form className={classes.form} onSubmit={handleFormSubmit}>
               <Avatar className={classes.avatar}>

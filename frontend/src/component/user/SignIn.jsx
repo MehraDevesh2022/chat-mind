@@ -18,7 +18,7 @@ import { useAlert } from "react-alert";
 import { useHistory } from "react-router-dom";
 import { clearError , loginUser} from "../../action/userAction";
 import Loader from "../utiils/Loader";
-
+import HomePage from "../../Pages/HomePage";
 
 export default function LoginForm() {
 
@@ -73,6 +73,7 @@ export default function LoginForm() {
         <Loader />
       ) : (
         <>
+        <HomePage/>
           <div className={classes.formContainer}>
             <form className={classes.form}>
               <Avatar className={classes.avatar}>
@@ -158,7 +159,7 @@ export default function LoginForm() {
                 style={{ marginTop: "1rem" }}
               >
                 Don't have an account?
-                <Link to="/signup" className={classes.createAccount}>
+                <Link to="/" className={classes.createAccount}>
                   Create Account
                 </Link>
               </Typography>
