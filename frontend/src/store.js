@@ -4,13 +4,15 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import { createUserReducer ,logoutUserReducer } from "./reducer/userReducer";
 import { createChatReducer , removeGroupChatReducer} from "./reducer/chatReducer";
-
+import { getAllMessageReducer , sendMessageReducer } from "./reducer/messageReducer";
 const rootReducer = combineReducers({
 
     UserData  : createUserReducer, 
     UserLogout : logoutUserReducer,
     ChatData : createChatReducer,
     mutateChat : removeGroupChatReducer,
+    MessageData : getAllMessageReducer,
+    sendMessage : sendMessageReducer,
 })
 
 
