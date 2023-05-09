@@ -64,7 +64,7 @@ export default function LoginForm() {
       alert.success(`Welcome Back ${user.name} !`);
       history.push("/chat")
     }
-  },[alert , error , isAuthenticated , dispatch])
+  },[alert , error ,history , isAuthenticated , dispatch , user])
   const isSignInDisabled = !(email && password && isValidEmail);
 
   return (

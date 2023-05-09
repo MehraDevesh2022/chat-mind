@@ -141,6 +141,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // input text Filed
+  // eslint-disable-next-line no-dupe-keys
   textField: {
     "& .MuiOutlinedInput-adornedEnd": {
       paddingRight: theme.spacing(0),

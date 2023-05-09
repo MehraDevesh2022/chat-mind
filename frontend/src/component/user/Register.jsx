@@ -104,7 +104,7 @@ const alert  = useAlert();
   };
 
   useEffect(() => {
-    console.log(isAuthenticated);
+ 
     if (error) {
        alert.error(error)
       dispatch(clearError());
@@ -113,7 +113,7 @@ const alert  = useAlert();
          alert.success("Welcome to ChatMind !");
       history.push("/chat");
     }
-  }, [error, isAuthenticated, history, loading, dispatch]);
+  }, [alert ,error, isAuthenticated, history, loading, dispatch]);
  
   return (
     <>
