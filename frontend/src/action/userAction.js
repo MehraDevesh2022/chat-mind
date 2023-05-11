@@ -12,7 +12,9 @@ import {
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
   LOAD_USER_FAIL,
-
+   GETALL_USER_REQUEST,
+  GETALL_USER_SUCCESS,
+  GETALL_USER_FAIL,
   CLEAR_ERRORS,
 } from "../constant/user";
 
@@ -33,6 +35,7 @@ export const createUser = (signupData) => async (dispatch) => {
   }
 };
 
+// login user
 export const loginUser = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_USER_REQUEST });
@@ -62,8 +65,6 @@ export const loadUser = () => async (dispatch) => {
 };
 
 // logout user
-
-
 export const logoutUser = () => async (dispatch) => {
   try {
     dispatch({ type: LOGOUT_USER_REQUEST });
@@ -75,6 +76,18 @@ export const logoutUser = () => async (dispatch) => {
 
 };
 
+
+// get all users
+export const getAllUsers = (search) => async (dispatch) => {
+  try {
+    dispatch({ type: GETALL_USER_REQUEST });
+  const config = { headers: { "Content-Type": "application/json" } };
+  const { data } = await axios.get(`/api/v1/user?search=${search}`, config);
+    dispatch({ type: GETALL_USER_SUCCESS, payload: data.users });
+  } catch (error) {
+    dispatch({ type: GETALL_USER_FAIL, payload: error.message });
+  }
+};
 
 // clear error =>
 export const clearError = () => async (dispatch) => {

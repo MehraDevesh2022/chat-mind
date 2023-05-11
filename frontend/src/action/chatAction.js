@@ -33,7 +33,7 @@ export const createChat = (userId) => async (dispatch) => {
     const config = {
       headers: { "Content-Type": "application/json" },
     };
-    const { data } = await axios.post(`/api/v1/chat`, userId, config);
+    const { data } = await axios.post(`/api/v1/chat/`, userId, config);
 
     dispatch({ type: CREATECHAT_CHAT_SUCCESS, payload: data.chatData });
   } catch (error) {

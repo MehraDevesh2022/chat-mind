@@ -1,28 +1,62 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { Box } from "@chakra-ui/layout";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import MyChats from "../component/Chat/MyChats/MyChats";
+import ChatBox from "../component/Chat/ChatBox/ChatBox";
+import SiderDrawer from "../component/Chat/SideDrawer/SiderDrawer";
+import { useAlert } from "react-alert";
+import { useHistory } from "react-router-dom";
+
+import { clearError } from "../action/userAction";
+import Loader from "../component/utiils/Loader";
 
 function ChatPage() {
-  const [chatData, setChatData] = useState([]);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const alert = useAlert();
+  const [fetchAgain, setFetchAgain] = useState(false);
+  const { error, isAuthenticated, loading } = useSelector(
+    (state) => state.UserData
+  );
 
- 
-  async function fetchData() {
-    try {
-      const {data} = await axios.get("/api/v1/chat");
-      console.log(data.chats);
-      setChatData(data.chats)
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
+  console.log(isAuthenticated);
   useEffect(() => {
-    fetchData();
-  }, []);
-  
+    if (error) {
+      alert.error(error);
+      dispatch(clearError());
+    }
+    if (!isAuthenticated) {
+      history.push("/");
+    }
+  }, [dispatch, alert, error, isAuthenticated, history]);
+
   return (
     <>
-      {chatData &&
-        chatData.map((chat) => <li key={chat._id}>{chat.chatName}</li>)}
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <div style={{ width: "100%" }}>
+            {isAuthenticated && <SiderDrawer />}
+            <Box
+              d="flex"
+              justifyContent="space-between"
+              w="100%"
+              h="91.5vh"
+              p="10px"
+            >
+              {isAuthenticated && <MyChats fetchAgain={fetchAgain} />}
+              {isAuthenticated && (
+                <ChatBox
+                  fetchAgain={fetchAgain}
+                  setFetchAgain={setFetchAgain}
+                />
+              )}
+            </Box>
+          </div>
+        </>
+      )}
     </>
   );
 }

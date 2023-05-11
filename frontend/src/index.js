@@ -7,6 +7,7 @@ import store from "./store";
 import { Provider } from "react-redux";
 import { positions, transitions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
+import { ChakraProvider } from "@chakra-ui/react";
 const options = {
   timeout: 5000,
   position: positions.BOTTOM_CENTER,
@@ -18,6 +19,7 @@ const options = {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
+    <ChakraProvider>
     <Provider store={store}>
       <BrowserRouter>
         <AlertProvider
@@ -29,6 +31,7 @@ root.render(
         </AlertProvider>
       </BrowserRouter>
     </Provider>
+    </ChakraProvider>
   </React.StrictMode>
 );
 

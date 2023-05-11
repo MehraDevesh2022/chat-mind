@@ -12,6 +12,9 @@ import {
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
   LOAD_USER_FAIL,
+  GETALL_USER_REQUEST,
+  GETALL_USER_SUCCESS,
+  GETALL_USER_FAIL,
 } from "../constant/user";
 
 export const createUserReducer = (state = { user: {} }, action) => {
@@ -53,6 +56,35 @@ export const createUserReducer = (state = { user: {} }, action) => {
     default:
       return state;
   }
+};
+
+
+// get all users
+export const getAllUserReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case GETALL_USER_REQUEST:
+      return {
+        loading: true,
+        users: [],
+      };
+    case GETALL_USER_SUCCESS:
+      return {
+        loading: false,
+        users: action.payload,
+      };
+    case GETALL_USER_FAIL:
+      return {  
+        loading: false,
+        error: action.payload,  
+      };
+    case CLEAR_ERRORS:
+      return {
+        error: null,
+        ...state,
+      };  
+    default:
+      return state;
+  } 
 };
 
 
