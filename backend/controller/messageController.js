@@ -9,18 +9,15 @@ const userModel = require("../model/UserModel");
 //@access          Protected
 
 exports.getAllMessage = asyncWrapper(async (req, res, next) => {
-  const message = await messageModel
+  const messages = await messageModel
     .find({ chat: req.params.chatId })
     .populate("sender", "name pic email")
     .populate("chat");
 
-  if (!message) {
+  if (!messages) {
     return next(new ErrorHandler("Chat id not found", 404));
   }
-  res.status(200).json({
-    success: true,
-    message,
-  });
+ res.json(messages);
 });
 
 //@description     Create New Message
@@ -29,6 +26,8 @@ exports.getAllMessage = asyncWrapper(async (req, res, next) => {
 
 exports.sendMessage = asyncWrapper(async (req, res, next) => {
   const { content, chatId } = req.body;
+
+
 
   if (!content || !chatId) {
     return next(new ErrorHandler("Invalid data passed into request", 400));
@@ -54,9 +53,6 @@ exports.sendMessage = asyncWrapper(async (req, res, next) => {
     latestMessage: message,
   });
 
-  res.status(201).json({
-    success  : true,
-    message
-  })
+    res.json(message);
 
 });

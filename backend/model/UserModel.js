@@ -24,16 +24,12 @@ const userSchema = new mongoose.Schema(
       minLength: [8, "Password should have more than 4 characters"],
       select: false, // this will make sure password is sended with data to anyone not even admin when he req for user data
     },
-  avatar : {
-    public_id : {
-         type : String ,
-         required : true
+    pic: {
+      type: "String",
+      required: true,
+      default:
+        "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     },
-    url :{
-        type : String ,
-        required : true,
-    },
-  },
     isAdmin: {
       type: Boolean,
       required: true,

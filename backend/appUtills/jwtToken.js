@@ -13,12 +13,14 @@ const sendJwtToekn  = (userData  , statusCode , res) =>{
   };
 
     res.status(statusCode).cookie("token", Token, options).json({
-      success: true,
-      user : userData,
-      token : Token
+      _id: userData._id,
+      name: userData.name,
+      email: userData.email,
+      isAdmin: userData.isAdmin,
+      pic: userData.pic,
     });
 
     
 }
 
-module.exports = sendJwtToekn 
+module.exports = sendJwtToekn;

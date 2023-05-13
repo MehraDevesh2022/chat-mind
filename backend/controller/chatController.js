@@ -9,7 +9,7 @@ const userModel = require("../model/UserModel");
 
 exports.getCreateChatController = asyncWrapper(async (req, res, next) => {
   const { userId } = req.body;
-
+     console.log(req.body);
   if (!userId) {
     return next(new ErrorHandler("UserId param not sent with request", 400));
   }
@@ -29,12 +29,9 @@ exports.getCreateChatController = asyncWrapper(async (req, res, next) => {
     select: "name avatar email", // get that senders deatils
   });
 
-  // if aleady chat available then send data else cerate a new chat between two sender or logged in user
-  if (isChat.length > 0) {
-    res.status(200).json({
-      success: true,
-      ChatData: isChat[0],
-    });
+  // if aleady chat available then send data else create a new chat between two sender or logged in user
+  if (isChat && isChat.length > 0) {
+    res.send(isChat[0]);
   } else {
     const chatData = {
       chatName: "sender",
@@ -44,16 +41,12 @@ exports.getCreateChatController = asyncWrapper(async (req, res, next) => {
 
     try {
       const createdChat = await chatModel.create(chatData);
-      const fullChat = await chatModel
+      const FullChat = await chatModel
         .findOne({ _id: createdChat._id }) // find Chat with chatId that created
         .populate("users", "-password"); // get all deatils of users those are commnicating
 
-      res.status(200).json({
-        success: true,
-        ChatData: fullChat,
-      });
+      res.status(200).json(FullChat);
     } catch (error) {
-        console.log(error ,"error");
       return next(new ErrorHandler(error.message, 400));
     }
   }
@@ -65,7 +58,7 @@ exports.getCreateChatController = asyncWrapper(async (req, res, next) => {
 //@access          Protected
 
 exports.createGroupChat  = asyncWrapper(async( req , res  , next) =>{
- 
+     console.log(req.body);
 
     if (!req.body.users || !req.body.name) {
     return next(new ErrorHandler("Please Fill all the feilds", 400));
@@ -95,10 +88,7 @@ exports.createGroupChat  = asyncWrapper(async( req , res  , next) =>{
          .populate("users", "-password")
          .populate("groupAdmin", "-password");
 
-           res.status(201).json({
-             success: true,
-             chatData: fullGroupChat,
-           });
+          res.status(200).json(fullGroupChat);
 
   } catch (error) {
       return next(new ErrorHandler(error.message , 400))
@@ -118,6 +108,7 @@ exports.removeFromGroup  = asyncWrapper(async( req  , res  , next) =>{
   if (!chatId || !userId) {
     return next(new ErrorHandler("Please Fill all the feilds", 400));
   }
+  // check if the requester is admin
 
   const removed = await chatModel
     .findByIdAndUpdate(chatId, {
@@ -125,19 +116,12 @@ exports.removeFromGroup  = asyncWrapper(async( req  , res  , next) =>{
     })
     .populate("users", "-password")
     .populate("groupAdmin", "-password");
-   
 
-    if(!removed){
-     return next(new ErrorHandler("Chat not found" , 404))
-
-    }else{
-     res.status(200).json({
-      success : true ,
-       chatData  : removed
-     });
-
-    }
-
+  if (!removed) {
+    return next(new ErrorHandler("Chat not found", 404));  
+  } else {
+      res.json(removed);
+  }
 })
 
 
@@ -147,18 +131,22 @@ exports.removeFromGroup  = asyncWrapper(async( req  , res  , next) =>{
 // @access  Protected
 
 exports.addToGroup  = asyncWrapper( async ( req , res , next) =>{
-
-  const { userId, chatId } = req.body;
+  const { chatId, userId } = req.body;
 
   if (!userId || !chatId) {
     return next(new ErrorHandler("Please Fill all the feilds", 400));
   }
+const isUser = await chatModel.findOne({ _id: chatId, users: userId }); // check if user is already in group or not
+  
+  if (isUser) { 
+    return next(new ErrorHandler("User already in group", 400));
+  }
 
-    const addUser = await chatModel
+    const added = await chatModel
       .findByIdAndUpdate(
         chatId,
         {
-          $push: {users : userId}, // adding in users array in groupChat model
+          $push: { users: userId }, // adding in users array in groupChat model
         },
         {
           new: true,
@@ -168,14 +156,10 @@ exports.addToGroup  = asyncWrapper( async ( req , res , next) =>{
       .populate("groupAdmin", "-password");
 
 
-    if(!addUser){
-          return next(new ErrorHandler("Chat not found", 404));
-    }else{
-
-      res.status(200).json({
-        success : true,
-        chatData : addUser
-      })
+    if (!added) {
+      return next(new ErrorHandler("Chat not found", 404));
+    } else {
+      res.json(added);
     }
 
 })
@@ -187,7 +171,7 @@ exports.renameGroup = asyncWrapper( async (req , res , next) =>{
 
 const {chatId , chatName}  = req.body;
 
-const updateChat = await chatModel
+const updatedChat = await chatModel
   .findByIdAndUpdate(
     chatId,
     {
@@ -201,16 +185,10 @@ const updateChat = await chatModel
   .populate("groupAdmin", "-password");
 
 
-  if(!updateChat){
-       return next(new ErrorHandler("Chat not found", 404));
-  }else{
-     res.status(200).json({
-
-        success : true ,
-        chatData  : updateChat
-   
-     })
-
+  if (!updatedChat) {
+    return next(new ErrorHandler("Chat not found", 404));
+  } else {
+    res.json(updatedChat);
   }
 
 })
@@ -232,15 +210,16 @@ exports.getAllChats  =  asyncWrapper( async (req , res , next) =>{
     .sort({ updatedAt: -1 }); // message latestMessage will send by latest updatedAt
 
 
-    const result = await userModel.populate(chats, {
-  path: "latestMessage.sender",
-  select: "name pic email",
-});
-  res.status(200).json({
-    success : true,
-    chatData : result
-  })
+    const results = await userModel.populate(chats, {
+      path: "latestMessage.sender",
+      select: "name pic email",
+    });
+    if(!results){
+      return next(new ErrorHandler("Chat not found", 404));
+  }
+    res.status(200).json(results);
+}
+)
 
-  })
 
 

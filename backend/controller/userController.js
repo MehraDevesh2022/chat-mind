@@ -8,6 +8,10 @@ const userModel = require("../model/UserModel");
  
 
 //>>>>>>get all search user expect this user <<<<<<<<<
+//@description     Get or Search all users
+//@route           GET /api/user?search=
+//@access          Public
+
 
 exports.allSearchUser = asyncWrapper(async (req, res) => {
   // Get the search keyword from the query parameter, if present
@@ -30,25 +34,25 @@ exports.allSearchUser = asyncWrapper(async (req, res) => {
   });
 
   // Send the list of matching users in the response
-  res.status(200).json({
-    success: true,
-    users: users,
-  });
+  res.send(users);
 });
 
 
 // >>>>> Create User Api <<<<<<<<< 
+//@description     Register new user
+//@route           POST /api/user/
+//@access          Public
 exports.registerUser = asyncWrapper(async (req, res, next) => {
-    
-   console.log(req.body);
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-       folder: "profile",
-       width: 150,
-       crop: "scale",
-     });
+  // cloudinary config for image upload to cloudinary server 
 
-     console.log(myCloud.public_id);
-     console.log(myCloud.secure_url);
+
+  const myCloud = await cloudinary.v2.uploader.upload(req.file.path, {
+    folder: "profile",
+    width: 150,
+    crop: "scale",
+  }); 
+ 
+  
  
 
   const { name, email, password } = req.body;
@@ -67,10 +71,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
     name,
     password,
     email,
-    avatar: {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    },
+    pic: myCloud.secure_url,
   });
 
   if (user) {
@@ -81,6 +82,9 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
 });
 
 // >>>>>> login user <<<<<<<<
+//@description     Auth the user
+//@route           POST /api/users/login
+//@access          Public
 exports.loginController = asyncWrapper(async (req, res, next) => {
   const { email, password } = req.body;
 
