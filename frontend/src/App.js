@@ -1,50 +1,42 @@
-import React  ,{useEffect} from "react";
+import "./App.css";
+import React ,{useEffect} from "react";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {loadUser , clearError} from "./action/userAction";
-import {useDispatch , useSelector } from "react-redux";
-import ChatPage from "./Pages/ChatPage";
-import "./app.css";
-import ForgetPassowrd from "./component/user/ForgotPassword";
-import SignupForm from "./component/user/Register";
-import LoginForm from "./component/user/SignIn";
-import { useHistory } from "react-router-dom";
+// import Chatpage from "./Pages/Chatpage";
+import { useHistory } from "react-router";
+import Signup from "./components/Authentication/Signup";
+import Login from "./components/Authentication/Login";
+import ForgetPassowrd from "./components/Authentication/ForgotPassword";
+
 function App() {
-
-  const dispatch = useDispatch();
   const history = useHistory();
-  const { error , loading, isAuthenticated  } = useSelector((state) => state.UserData);
-   
-  
-  useEffect(() => {
-    if (error) {
-      dispatch(clearError()); 
-    }
-    if (!loading && !isAuthenticated) {
-      history.push("/login");
-    }
-    dispatch(loadUser());
+ const user = JSON.parse(localStorage.getItem("userInfo"));
 
-    }, [dispatch, error, history, isAuthenticated, loading])
+  useEffect(() => { 
+    if (!user) history.push("/");
+    else history.push("/chats");
+  }, [history , user]);
+
   return (
-    <>
+    <div className="App">
       <Router>
         <Switch>
           <Route exact path="/">
-            <SignupForm />
+            <Signup />
           </Route>
           <Route exact path="/login">
-            <LoginForm />
+            {" "}
+            <Login />
           </Route>
+
           <Route exact path="/forgot/password">
+            {" "}
             <ForgetPassowrd />
           </Route>
-          <Route exact path="/chat">
-            <ChatPage />
-          </Route>
+          {/* <Route exact path="/chats" component={Chatpage} /> */}
         </Switch>
-      
       </Router>
-    </>
+    </div>
   );
 }
 
