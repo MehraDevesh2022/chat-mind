@@ -135,8 +135,5 @@ exports.loadUser = asyncWrapper (async( req , res) =>{
 
   const user = await  userModel.findById(req.user._id);
 
-  res.status(200).json({
-    success: true,
-    user, // profile details of user
-  });
+   res.send(user);
 })
