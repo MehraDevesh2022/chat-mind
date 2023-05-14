@@ -46,20 +46,20 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
   // cloudinary config for image upload to cloudinary server 
 
 
-  const myCloud = await cloudinary.v2.uploader.upload(req.file.path, {
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.pic, {
     folder: "profile",
     width: 150,
     crop: "scale",
   }); 
  
-  
+    
  
 
   const { name, email, password } = req.body;
-
+  
   if (!name || !email || !password) {
     return next(new ErrorHandler("Please Enter all the Feilds", 400));
-  }
+  }   
 
   const userExits = await UserModel.findOne({ email });
  
@@ -77,6 +77,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
   if (user) {
     sendJwtToekn(user, 201, res);
   } else {
+    console.log("error");
     return next(new ErrorHandler("Bad request", 400));
   }
 });
