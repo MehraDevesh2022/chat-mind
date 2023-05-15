@@ -16,8 +16,9 @@ import {
   DrawerHeader,
   DrawerOverlay,
 } from "@chakra-ui/modal";
+import "./SideDrawer.css";
 import { Tooltip } from "@chakra-ui/tooltip";
-import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { BellIcon, ChevronDownIcon ,  DeleteIcon, EditIcon, ExternalLinkIcon, SettingsIcon  } from "@chakra-ui/icons";
 import { Avatar } from "@chakra-ui/avatar";
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
@@ -118,6 +119,7 @@ function SideDrawer() {
         duration: 5000,
         isClosable: true,
         position: "bottom-left",
+       
       });
     }
   };
@@ -128,22 +130,61 @@ function SideDrawer() {
         d="flex"
         justifyContent="space-between"
         alignItems="center"
-        bg="white"
+        bg="#28293D"
         w="100%"
         p="5px 10px 5px 10px"
         borderWidth="5px"
+        borderColor="#555770"
+        color="#EBEBF0"
       >
-        <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
-          <Button variant="ghost" onClick={onOpen}>
+        <Tooltip
+          label="Search Users to chat"
+          hasArrow
+          placement="bottom-end"
+          bgGradient="linear(to-r, #3E7BFA, #6600CC)"
+          color="#FFFFFF"
+          _hover={{
+            bg: "#555770",
+            color: "#FFFFFF",
+          }}
+        >
+          <Button
+            variant="ghost"
+            onClick={onOpen}
+            _hover={{
+              bg: "#555770",
+            }}
+            _active={{
+              bg: "transparent",
+              color: "#FFFFFF",
+            }}
+          >
             <i className="fas fa-search"></i>
-            <Text d={{ base: "none", md: "flex" }} px={4}>
+            <Text
+              d={{ base: "none", md: "flex" }}
+              px={4}
+              _hover={{
+                bg: "#555770",
+              }}
+            >
               Search User
             </Text>
           </Button>
         </Tooltip>
-        <Text fontSize="2xl" fontFamily="Work sans">
-          Talk-A-Tive
+
+        <Text
+          fontSize="2.5rem"
+          fontWeight="bold"
+          textTransform="uppercase"
+          display="inline-block"
+          bgGradient="linear(to-r, #FF3B3B, #6600CC)"
+          bgClip="text"
+          cursor="pointer"
+          textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)" // Update the shadow effect
+        >
+          ChatMind
         </Text>
+
         <div>
           <Menu>
             <MenuButton p={1}>
@@ -153,8 +194,8 @@ function SideDrawer() {
               />
               <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
-            <MenuList pl={2}>
-              {!notification.length && "No New Messages"}
+            <MenuList pl={2} bg="#28293D" color="white">
+              {!notification.length && <MenuItem>No New Messages</MenuItem>}
               {notification.map((notif) => (
                 <MenuItem
                   key={notif._id}
@@ -171,20 +212,45 @@ function SideDrawer() {
             </MenuList>
           </Menu>
           <Menu>
-            <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>
+            <MenuButton as={Button} bg="transparent" _hover={{ bg: "#555770" }}>
               <Avatar
                 size="sm"
                 cursor="pointer"
                 name={user.name}
                 src={user.pic}
               />
+              <ChevronDownIcon _hover={{ color: "#6600CC" }} />
             </MenuButton>
-            <MenuList>
-              <ProfileModal user={user}>
-                <MenuItem>My Profile</MenuItem>{" "}
-              </ProfileModal>
+            <MenuList bg="#28293D" border="none" shadow="none" p={0}>
+              <Box p={2} textAlign="center">
+                <Avatar size="md" name={user.name} src={user.pic} mb={2} />
+                <Box fontSize="sm">
+                  <strong>ID:</strong> 628c511114 <br />
+                  <strong>Name:</strong> DEVESH MEHRA <br />
+                  <strong>Email:</strong> dev.mehara97@gmail.com <br />
+                  <strong>Created At:</strong> 05/11/2023 10:33 AM
+                </Box>
+              </Box>
               <MenuDivider />
-              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+              <ProfileModal user={user}>
+                <MenuItem _hover={{ bg: "#555770" }}>
+                  <EditIcon mr={2} boxSize={4} />
+                  Profile
+                </MenuItem>
+              </ProfileModal>
+              <MenuItem _hover={{ bg: "#555770" }}>
+                <DeleteIcon mr={2} boxSize={4} />
+                Delete Account
+              </MenuItem>
+
+              <MenuItem _hover={{ bg: "#555770" }}>
+                <SettingsIcon mr={2} boxSize={4} />
+                Settings
+              </MenuItem>
+              <MenuItem _hover={{ bg: "#555770" }} onClick={logoutHandler}>
+                <ExternalLinkIcon mr={2} boxSize={4} />
+                Logout
+              </MenuItem>
             </MenuList>
           </Menu>
         </div>
@@ -192,8 +258,21 @@ function SideDrawer() {
 
       <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+        <DrawerContent bg="#28293D" color="#28293D">
+          <DrawerHeader
+            borderBottomWidth="1px"
+            fontWeight="bold"
+            textTransform="uppercase"
+            display="inline-block"
+            bgGradient="linear(to-r, #FF3B3B, #6600CC)"
+            bgClip="text"
+            cursor="pointer"
+            textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
+            textAlign="center"
+            fontSize="2rem"
+          >
+            ChatMind
+          </DrawerHeader>
           <DrawerBody>
             <Box d="flex" pb={2}>
               <Input
@@ -201,8 +280,27 @@ function SideDrawer() {
                 mr={2}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                color="#F2F2F5"
+                bg="#555770"
               />
-              <Button onClick={handleSearch}>Go</Button>
+              <Button
+                onClick={handleSearch}
+                color="#F2F2F5"
+                bg="#555770"
+                _hover={{
+                  bg: "#6600CC",
+                  color: "#F2F2F5",
+                  boxShadow: "2px 2px 8px rgba(0, 0, 0, 0.6)",
+                }}
+                _active={{
+                  bg: "#6600CC",
+                  color: "#F2F2F5",
+                  boxShadow: "none",
+                }}
+                p={3}
+              >
+                Go
+              </Button>
             </Box>
             {loading ? (
               <ChatLoading />
@@ -217,6 +315,7 @@ function SideDrawer() {
             )}
             {loadingChat && <Spinner ml="auto" d="flex" />}
           </DrawerBody>
+         
         </DrawerContent>
       </Drawer>
     </>

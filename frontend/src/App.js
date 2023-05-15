@@ -1,8 +1,8 @@
 import "./App.css";
-import React ,{useEffect} from "react";
+import React, { useEffect } from "react";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-// import Chatpage from "./Pages/Chatpage";
+import Chatpage from "./Pages/Chatpage";
 import { useHistory } from "react-router";
 import Signup from "./components/Authentication/Signup";
 import Login from "./components/Authentication/Login";
@@ -10,18 +10,21 @@ import ForgetPassowrd from "./components/Authentication/ForgotPassword";
 
 function App() {
   const history = useHistory();
- const user = JSON.parse(localStorage.getItem("userInfo"));
+  const user = JSON.parse(localStorage.getItem("userInfo"));
 
-  useEffect(() => { 
+  useEffect(() => {
+
+
     if (!user) history.push("/");
     else history.push("/chats");
-  }, [history , user]);
+  }, [history, user]);
 
   return (
     <div className="App">
       <Router>
         <Switch>
           <Route exact path="/">
+
             <Signup />
           </Route>
           <Route exact path="/login">
@@ -33,7 +36,8 @@ function App() {
             {" "}
             <ForgetPassowrd />
           </Route>
-          {/* <Route exact path="/chats" component={Chatpage} /> */}
+
+          <Route exact path="/chats" component={Chatpage} />
         </Switch>
       </Router>
     </div>

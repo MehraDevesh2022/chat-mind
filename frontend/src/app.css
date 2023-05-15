@@ -5,7 +5,7 @@ body{
   padding: 0 !important;
 font-family: 'Roboto', sans-serif !important;
   background-color: #1C1C28 !important;
-  color: #f5f5f5 !important;
+  color: #f5f5f5 ;
 }
 
 ::-webkit-scrollbar {

@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   formContainer: {
@@ -6,14 +7,15 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     marginTop: "3rem",
     height: "auto",
+    color: "#F2F2F5",
   },
   form: {
-
     margin: "auto",
     borderRadius: "5px",
     alignContent: "center",
     padding: "2rem",
     width: "70vmin",
+    color: "#F2F2F5",
   },
 
   heading: {

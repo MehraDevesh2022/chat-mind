@@ -3,65 +3,75 @@ import {
   Modal,
   ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
+ 
   ModalBody,
   ModalCloseButton,
   Button,
   useDisclosure,
   IconButton,
   Text,
-  Image,
-} from "@chakra-ui/react";
 
+} from "@chakra-ui/react";
+import { Flex, Avatar } from "@chakra-ui/react";
 const ProfileModal = ({ user, children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  return (
-    <>
-      {children ? (
-        <span onClick={onOpen}>{children}</span>
-      ) : (
-        <IconButton d={{ base: "flex" }} icon={<ViewIcon />} onClick={onOpen} />
-      )}
-      <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
-        <ModalOverlay />
-        <ModalContent h="410px">
-          <ModalHeader
-            fontSize="40px"
-            fontFamily="Work sans"
-            d="flex"
-            justifyContent="center"
-          >
-            {user.name}
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody
-            d="flex"
-            flexDir="column"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Image
-              borderRadius="full"
-              boxSize="150px"
-              src={user.pic}
-              alt={user.name}
-            />
-            <Text
-              fontSize={{ base: "28px", md: "30px" }}
-              fontFamily="Work sans"
-            >
+return (
+  <>
+    {children ? (
+      <span onClick={onOpen}>{children}</span>
+    ) : (
+      <IconButton
+        icon={<ViewIcon  />}
+        onClick={onOpen}
+        bg="red"
+        color="white"
+        pos="absolute"
+        top={4}
+        right={4}
+      />
+    )}
+    <Modal size="2xl" onClose={onClose} isOpen={isOpen} isCentered>
+      <ModalOverlay />
+      <ModalContent
+        h="auto"
+        w="auto"
+        bg="#28293D"
+        color="#F2F2F5"
+        pt={4}
+        pb={4}
+      >
+        <ModalCloseButton color="#F2F2F5" pos="absolute" top={4} right={4} />
+        <ModalBody d="flex" alignItems="center" justifyContent="center">
+          <Avatar
+            size="xl"
+            borderRadius="lg"
+            width="200px"
+            height="200px"
+            src={user.pic}
+            alt={user.name}
+            mr={8}
+          />
+          <Flex direction="column" alignItems="flex-start">
+            <Text fontSize="1.2rem" mt={2}>
+              ID: 628c511114
+            </Text>
+            <Text fontSize="1.2rem" mt={2}>
+              Created At: 05/11/2023 10:33 AM
+            </Text>
+            <Text fontSize="1.2rem" mt={2}>
               Email: {user.email}
             </Text>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  );
+            <Text fontSize="2rem" fontWeight="bold" mt={4}>
+              {user.name}
+            </Text>
+          </Flex>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
+  </>
+);
+
 };
 
 export default ProfileModal;
