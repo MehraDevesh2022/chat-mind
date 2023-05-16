@@ -55,7 +55,7 @@ const GroupChatModal = ({ children }) => {
       setLoading(true);
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+      "Content-type" : "appilication/json"
         },
       };
       const { data } = await axios.get(`/api/user?search=${search}`, config);
@@ -79,6 +79,18 @@ const GroupChatModal = ({ children }) => {
   };
 
   const handleSubmit = async () => {
+   
+    if (selectedUsers.length <= 2) {
+      toast({
+        title: "Please select more than 2 users",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+
+      return;
+    }
     if (!groupChatName || !selectedUsers) {
       toast({
         title: "Please fill all the feilds",
@@ -89,13 +101,14 @@ const GroupChatModal = ({ children }) => {
       });
       return;
     }
+     
 
     try {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
+       const config = {
+         headers: {
+           "Content-type": "appilication/json",
+         },
+       };
       const { data } = await axios.post(
         `/api/chat/group`,
         {
@@ -131,21 +144,33 @@ const GroupChatModal = ({ children }) => {
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="#28293D">
           <ModalHeader
             fontSize="35px"
-            fontFamily="Work sans"
+            fontFamily="Work Sans"
             d="flex"
             justifyContent="center"
+            background="#1C1C28"
+            color="#F2F2F5"
+            p={2}
+            mb={3}
+            borderRadius="md"
+            boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
           >
             Create Group Chat
           </ModalHeader>
-          <ModalCloseButton />
+
+          <ModalCloseButton color="#F2F2F5" />
           <ModalBody d="flex" flexDir="column" alignItems="center">
             <FormControl>
               <Input
                 placeholder="Chat Name"
                 mb={3}
+                bg="#555770"
+                color="#F2F2F5"
+                _placeholder={{
+                  color: "#F2F2F5",
+                }}
                 onChange={(e) => setGroupChatName(e.target.value)}
               />
             </FormControl>
@@ -153,6 +178,11 @@ const GroupChatModal = ({ children }) => {
               <Input
                 placeholder="Add Users eg: John, Piyush, Jane"
                 mb={1}
+                bg="#555770"
+                color="#F2F2F5"
+                _placeholder={{
+                  color: "#F2F2F5",
+                }}
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </FormControl>
@@ -166,7 +196,6 @@ const GroupChatModal = ({ children }) => {
               ))}
             </Box>
             {loading ? (
-              // <ChatLoading />
               <div>Loading...</div>
             ) : (
               searchResult
@@ -181,8 +210,19 @@ const GroupChatModal = ({ children }) => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleSubmit} colorScheme="blue">
-              Create Chat
+            <Button
+              d="flex"
+              fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+       
+              color="#E4E4EB" 
+              bg="#555770" 
+              _hover={{
+                
+                transform: "scale(1.1)",
+                bg: "#6600CC",
+              }}
+            >
+              Create Group
             </Button>
           </ModalFooter>
         </ModalContent>

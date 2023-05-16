@@ -9,7 +9,7 @@ const userModel = require("../model/UserModel");
 
 exports.getCreateChatController = asyncWrapper(async (req, res, next) => {
   const { userId } = req.body;
-     console.log(req.body);
+ 
   if (!userId) {
     return next(new ErrorHandler("UserId param not sent with request", 400));
   }
@@ -24,14 +24,21 @@ exports.getCreateChatController = asyncWrapper(async (req, res, next) => {
     .populate("users", "-password") // users all info exclude password
     .populate("latestMessage"); //  messageModel data
 
+ 
+
+
+
   isChat = await userModel.populate(isChat, {
     path: "latestMessage.sender", // sender from messageModel
     select: "name avatar email", // get that senders deatils
   });
 
+
+
   // if aleady chat available then send data else create a new chat between two sender or logged in user
-  if (isChat && isChat.length > 0) {
-    res.send(isChat[0]);
+  if (isChat) {
+  res.send(isChat);
+  return;
   } else {
     const chatData = {
       chatName: "sender",
@@ -137,7 +144,10 @@ exports.addToGroup  = asyncWrapper( async ( req , res , next) =>{
     return next(new ErrorHandler("Please Fill all the feilds", 400));
   }
 const isUser = await chatModel.findOne({ _id: chatId, users: userId }); // check if user is already in group or not
-  
+ 
+
+
+
   if (isUser) { 
     return next(new ErrorHandler("User already in group", 400));
   }

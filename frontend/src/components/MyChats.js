@@ -21,11 +21,12 @@ const MyChats = ({ fetchAgain }) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
         },
-      };
+      }
 
       const { data } = await axios.get("/api/chat", config);
+ ;
       setChats(data);
     } catch (error) {
       toast({
@@ -40,6 +41,7 @@ const MyChats = ({ fetchAgain }) => {
   };
 
   useEffect(() => {
+
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
     // eslint-disable-next-line
@@ -51,37 +53,50 @@ const MyChats = ({ fetchAgain }) => {
       flexDir="column"
       alignItems="center"
       p={3}
-      bg="white"
+      bg="#28293D"
       w={{ base: "100%", md: "31%" }}
       borderRadius="lg"
-      borderWidth="1px"
+      borderWidth="2px"
+      borderColor="#555770"
     >
       <Box
         pb={3}
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
-        fontFamily="Work sans"
+        fontFamily="Work Sans"
         d="flex"
         w="100%"
         justifyContent="space-between"
         alignItems="center"
+        color="#E4E4EB"
+        bg="#28293D"
       >
-        My Chats
+        <Box fontWeight="bold" textShadow="3px 3px 6px rgba(0, 0, 0, 0.5)">
+          All Chats
+        </Box>
         <GroupChatModal>
           <Button
             d="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             rightIcon={<AddIcon />}
+            color="#E4E4EB" // Set button font color to #E4E4EB
+            bg="#555770" // Set button background color to #555770
+            _hover={{
+              // Add hover effect styles
+              transform: "scale(1.1)",
+              bg: "#6600CC",
+            }}
           >
             New Group Chat
           </Button>
         </GroupChatModal>
       </Box>
+      ;
       <Box
         d="flex"
         flexDir="column"
         p={3}
-        bg="#F8F8F8"
+        bg="#555770"
         w="100%"
         h="100%"
         borderRadius="lg"
@@ -93,8 +108,8 @@ const MyChats = ({ fetchAgain }) => {
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
-                bg={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
-                color={selectedChat === chat ? "white" : "black"}
+                bg={selectedChat === chat ? "#AC5DD9" : "#8F90A6"}
+                color={selectedChat === chat ? "#E4E4EB" : "black"}
                 px={3}
                 py={2}
                 borderRadius="lg"
