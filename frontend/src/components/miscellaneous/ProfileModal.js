@@ -6,7 +6,7 @@ import {
  
   ModalBody,
   ModalCloseButton,
-  Button,
+
   useDisclosure,
   IconButton,
   Text,
@@ -29,6 +29,7 @@ return (
         pos="absolute"
         top={4}
         right={4}
+        className="close-button"
       />
     )}
     <Modal size="2xl" onClose={onClose} isOpen={isOpen} isCentered>

@@ -4,3 +4,23 @@
   overflow-y: scroll;
   scrollbar-width: none;
 }
+
+.css-4g3h2a{
+  background-color: #555770 !important;
+  position: absolute !important ;
+    top: 100px !important;
+    right: 7rem !important;
+    border-bottom-left-radius: 20px !important;
+}
+
+.css-4g3h2a:hover{
+  background-color: #6600CC !important;
+}
+
+.css-1l19v1o{
+         position: absolute !important ;
+    top: 0px !important;
+    right: 0px !important;
+    background: #E53535 !important;
+    border-bottom-left-radius: 20px !important;
+}

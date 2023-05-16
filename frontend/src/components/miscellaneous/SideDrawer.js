@@ -74,12 +74,12 @@ function SideDrawer() {
 
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          "Content-type": "application/json",
         },
       };
 
       const { data } = await axios.get(`/api/user?search=${search}`, config);
-
+     console.log(data , "data") ;
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -94,6 +94,7 @@ function SideDrawer() {
     }
   };
 
+   // handle the access chat function 
   const accessChat = async (userId) => {
     console.log(userId);
 
@@ -102,11 +103,11 @@ function SideDrawer() {
       const config = {
         headers: {
           "Content-type": "application/json",
-          Authorization: `Bearer ${user.token}`,
         },
       };
       const { data } = await axios.post(`/api/chat`, { userId }, config);
 
+      console.log(data);
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat(data);
       setLoadingChat(false);
@@ -305,17 +306,16 @@ function SideDrawer() {
             {loading ? (
               <ChatLoading />
             ) : (
-              searchResult?.map((user) => (
+              searchResult?.map((myuser) => (
                 <UserListItem
-                  key={user._id}
-                  user={user}
-                  handleFunction={() => accessChat(user._id)}
+                  key={myuser._id}
+                  user={myuser}
+                  handleFunction={() => accessChat(myuser._id)}
                 />
               ))
             )}
             {loadingChat && <Spinner ml="auto" d="flex" />}
           </DrawerBody>
-         
         </DrawerContent>
       </Drawer>
     </>
