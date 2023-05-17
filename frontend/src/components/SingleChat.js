@@ -1,6 +1,12 @@
 import { FormControl } from "@chakra-ui/form-control";
-import { Input } from "@chakra-ui/input";
-import { Box, Text } from "@chakra-ui/layout";
+import {
+  Input,
+  InputGroup,
+  InputRightElement,
+} from "@chakra-ui/react";
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
+import Send from "@mui/icons-material/Send";
+import {  Box, Text } from "@chakra-ui/layout";
 import "./styles.css";
 import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { getSender, getSenderFull } from "../config/ChatLogics";
@@ -10,8 +16,9 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 import Lottie from "react-lottie";
+import EmojiOptions from "./EmojiOptions";
 import animationData from "../animations/typing.json";
-
+import backgroundImage from "../img/img.jpg";
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
@@ -38,13 +45,23 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat, setSelectedChat, user, notification, setNotification } =
     ChatState();
 
+  const [showEmojiOptions, setShowEmojiOptions] = useState(false);
+
+  const handleEmojiClick = (emoji) => {
+    setNewMessage((prevMessage) => prevMessage + emoji);
+  };
+
+  const handleToggleEmojiOptions = () => {
+    setShowEmojiOptions((prevState) => !prevState);
+  };
+
   const fetchMessages = async () => {
     if (!selectedChat) return;
 
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+         "Content-type": "application/json",
         },
       };
 
@@ -70,17 +87,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   };
 
+ 
+// sendMessage is used to send message on clicking send button
   const sendMessage = async (event) => {
-    if (event.key === "Enter" && newMessage) {
+    if (newMessage && event.key === "Enter") {
       socket.emit("stop typing", selectedChat._id);
       try {
         const config = {
           headers: {
             "Content-type": "application/json",
-            Authorization: `Bearer ${user.token}`,
           },
         };
+
         setNewMessage("");
+
         const { data } = await axios.post(
           "/api/message",
           {
@@ -169,10 +189,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             w="100%"
             fontFamily="Work sans"
             d="flex"
+            fontWeight={800}
+              textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
             justifyContent={{ base: "space-between" }}
             alignItems="center"
+          
+            
           >
             <IconButton
+              bg="linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%);"
+              color="#F2F2F5"
+              _hover={{ bg: "#6600CC" }}
               d={{ base: "flex", md: "none" }}
               icon={<ArrowBackIcon />}
               onClick={() => setSelectedChat("")}
@@ -201,7 +228,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             flexDir="column"
             justifyContent="flex-end"
             p={3}
-            bg="#E8E8E8"
+            bg={`url(${backgroundImage})`}
+            bgSize="cover"
             w="100%"
             h="100%"
             borderRadius="lg"
@@ -239,13 +267,46 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               ) : (
                 <></>
               )}
-              <Input
-                variant="filled"
-                bg="#E0E0E0"
-                placeholder="Enter a message.."
-                value={newMessage}
-                onChange={typingHandler}
-              />
+
+              <InputGroup>
+                <Input
+                  variant="filled"
+                  bg="#28293D"
+                  placeholder="Enter a message.."
+                  value={newMessage}
+                  color="#F2F2F5"
+                  _placeholder={{ color: "#F2F2F5" }}
+                  _hover={{ bg: "#1C1C28" }}
+                  onChange={typingHandler}
+                  _focus={{
+                    bg: "#1C1C28",
+                  }}
+                  pr="4rem"
+                  pb="0" 
+                 
+                />
+                <InputRightElement width="4rem">
+                  <IconButton
+                    icon={<EmojiEmotionsIcon />}
+                    onClick={handleToggleEmojiOptions}
+                    aria-label="Open Emoji Options"
+                    bg="none"
+                    _hover={{ bg: "none" }}
+                    color="linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%)"
+                  />
+                  <IconButton
+                    icon={<Send />}
+                    onClick={sendMessage}
+                    aria-label="Send Message"
+                    bg="none"
+                    _hover={{ bg: "none" }}
+                    color="linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%)"
+                  />
+                </InputRightElement>
+              </InputGroup>
+              {showEmojiOptions && (
+                <EmojiOptions handleEmojiClick={handleEmojiClick} />
+              )}
             </FormControl>
           </Box>
         </>

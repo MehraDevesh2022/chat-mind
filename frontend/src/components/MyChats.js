@@ -12,7 +12,7 @@ import { ChatState } from "../Context/ChatProvider";
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
 
-  const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+  const { selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
   const toast = useToast();
 
@@ -23,10 +23,9 @@ const MyChats = ({ fetchAgain }) => {
         headers: {
           "Content-Type": "application/json",
         },
-      }
+      };
 
       const { data } = await axios.get("/api/chat", config);
- ;
       setChats(data);
     } catch (error) {
       toast({
@@ -41,7 +40,6 @@ const MyChats = ({ fetchAgain }) => {
   };
 
   useEffect(() => {
-
     setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
     fetchChats();
     // eslint-disable-next-line
@@ -60,7 +58,7 @@ const MyChats = ({ fetchAgain }) => {
       borderColor="#555770"
     >
       <Box
-        pb={3}
+        pb={1}
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
         fontFamily="Work Sans"
@@ -69,7 +67,9 @@ const MyChats = ({ fetchAgain }) => {
         justifyContent="space-between"
         alignItems="center"
         color="#E4E4EB"
-        bg="#28293D"
+        borderRadius="md"
+        boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
+        background="#1C1C28"
       >
         <Box fontWeight="bold" textShadow="3px 3px 6px rgba(0, 0, 0, 0.5)">
           All Chats
@@ -79,8 +79,10 @@ const MyChats = ({ fetchAgain }) => {
             d="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
             rightIcon={<AddIcon />}
-            color="#E4E4EB" // Set button font color to #E4E4EB
-            bg="#555770" // Set button background color to #555770
+            color="#E4E4EB"
+            bg="linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%)"
+            textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
+            boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
             _hover={{
               // Add hover effect styles
               transform: "scale(1.1)",
@@ -96,11 +98,12 @@ const MyChats = ({ fetchAgain }) => {
         d="flex"
         flexDir="column"
         p={3}
-        bg="#555770"
+        background="#1C1C28"
         w="100%"
         h="100%"
         borderRadius="lg"
         overflowY="hidden"
+        boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
       >
         {chats ? (
           <Stack overflowY="scroll">
@@ -108,12 +111,13 @@ const MyChats = ({ fetchAgain }) => {
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
-                bg={selectedChat === chat ? "#AC5DD9" : "#8F90A6"}
-                color={selectedChat === chat ? "#E4E4EB" : "black"}
+                bg={selectedChat === chat ? "#6600CC" : "#555770"}
+                color={selectedChat === chat ? "#E4E4EB" : "#F2F2F5"}
                 px={3}
                 py={2}
                 borderRadius="lg"
                 key={chat._id}
+                boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
               >
                 <Text>
                   {!chat.isGroupChat

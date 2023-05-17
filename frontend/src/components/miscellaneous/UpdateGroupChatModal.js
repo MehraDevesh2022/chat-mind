@@ -29,11 +29,13 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [renameloading, setRenameLoading] = useState(false);
+  const [isUserList , setUserList] = useState(false);
   const toast = useToast();
 
   const { selectedChat, setSelectedChat, user } = ChatState();
 
   const handleSearch = async (query) => {
+    setUserList(true);
     setSearch(query);
     if (!query) {
       return;
@@ -43,7 +45,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       setLoading(true);
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+         "Content-type" : "appilication/json",
         },
       };
       const { data } = await axios.get(`/api/user?search=${search}`, config);
@@ -102,6 +104,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   };
 
   const handleAddUser = async (user1) => {
+ setUserList(false);
     if (selectedChat.users.find((u) => u._id === user1._id)) {
       toast({
         title: "User Already in group!",
@@ -126,18 +129,14 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
 
     try {
       setLoading(true);
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
+     
       const { data } = await axios.put(
         `/api/chat/groupadd`,
         {
           chatId: selectedChat._id,
           userId: user1._id,
         },
-        config
+       
       );
 
       setSelectedChat(data);
@@ -168,20 +167,18 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       });
       return;
     }
+    console.log(user1._id);
+    console.log(selectedChat._id); 
 
     try {
       setLoading(true);
-      const config = {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      };
+      const config = { headers : {"Content-type" : "application/json"} };
       const { data } = await axios.put(
         `/api/chat/groupremove`,
         {
           chatId: selectedChat._id,
           userId: user1._id,
-        },
+        }, 
         config
       );
 
@@ -209,12 +206,21 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg="#28293D" overflowY="scroll"
+        height="60%"
+        >
           <ModalHeader
             fontSize="35px"
-            fontFamily="Work sans"
+            fontFamily="Work Sans"
             d="flex"
             justifyContent="center"
+            background="#1C1C28"
+            color="#F2F2F5"
+            p={2}
+            mb={3}
+            borderRadius="md"
+            boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
+            textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
           >
             {selectedChat.chatName}
           </ModalHeader>
@@ -234,14 +240,26 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             <FormControl d="flex">
               <Input
                 placeholder="Chat Name"
-                mb={3}
+                mb={1}
+                bg="#555770"
+                color="#F2F2F5"
+                _placeholder={{
+                  color: "#F2F2F5",
+                }}
                 value={groupChatName}
                 onChange={(e) => setGroupChatName(e.target.value)}
               />
               <Button
-                variant="solid"
-                colorScheme="teal"
-                ml={1}
+                d="flex"
+                fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+                color="#E4E4EB"
+                background="linear-gradient(145.51deg, #AC5DD9 7.21%, #004FC4 94.47%);
+"
+                textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
+                boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
+                _hover={{
+                  bg: "#6600CC",
+                }}
                 isLoading={renameloading}
                 onClick={handleRename}
               >
@@ -252,6 +270,11 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
               <Input
                 placeholder="Add User to group"
                 mb={1}
+                bg="#555770"
+                color="#F2F2F5"
+                _placeholder={{
+                  color: "#F2F2F5",
+                }}
                 onChange={(e) => handleSearch(e.target.value)}
               />
             </FormControl>
@@ -259,7 +282,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             {loading ? (
               <Spinner size="lg" />
             ) : (
-              searchResult?.map((user) => (
+             isUserList && searchResult?.map((user) => (
                 <UserListItem
                   key={user._id}
                   user={user}
@@ -269,7 +292,20 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => handleRemove(user)} colorScheme="red">
+            <Button
+              onClick={() => handleRemove(user)}
+              d="flex"
+              fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+              color="#E4E4EB"
+              background="linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%);
+"
+              textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
+              boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
+              _hover={{
+                transform: "scale(1.1)",
+                bg: "#6600CC",
+              }}
+            >
               Leave Group
             </Button>
           </ModalFooter>

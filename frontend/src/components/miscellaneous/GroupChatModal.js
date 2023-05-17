@@ -28,7 +28,7 @@ const GroupChatModal = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
-  const { user, chats, setChats } = ChatState();
+  const {  chats, setChats } = ChatState();
 
   const handleGroup = (userToAdd) => {
     if (selectedUsers.includes(userToAdd)) {
@@ -59,7 +59,8 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.get(`/api/user?search=${search}`, config);
-      console.log(data);
+     
+
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -102,13 +103,9 @@ const GroupChatModal = ({ children }) => {
       return;
     }
      
-
+  
     try {
-       const config = {
-         headers: {
-           "Content-type": "appilication/json",
-         },
-       };
+      const config = { headers: { "Content-type": "application/json" } };
       const { data } = await axios.post(
         `/api/chat/group`,
         {
@@ -155,6 +152,7 @@ const GroupChatModal = ({ children }) => {
             p={2}
             mb={3}
             borderRadius="md"
+            textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
             boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
           >
             Create Group Chat
@@ -213,11 +211,13 @@ const GroupChatModal = ({ children }) => {
             <Button
               d="flex"
               fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-       
-              color="#E4E4EB" 
-              bg="#555770" 
+              onClick={handleSubmit}
+              color="#E4E4EB"
+              background="linear-gradient(147.14deg, #3E7BFA 6.95%, #6600CC 93.05%);
+"
+              textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
+              boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
               _hover={{
-                
                 transform: "scale(1.1)",
                 bg: "#6600CC",
               }}

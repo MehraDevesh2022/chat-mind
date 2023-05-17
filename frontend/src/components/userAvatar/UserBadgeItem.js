@@ -14,6 +14,15 @@ const UserBadgeItem = ({ user, handleFunction, admin }) => {
       colorScheme="purple"
       cursor="pointer"
       onClick={handleFunction}
+      style={{
+        background: "linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%)", 
+        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", 
+      }}
+      _hover={{
+        background: "#4D0099", 
+        transform: "scale(1.2)", 
+     marginLeft: "5px",
+      }}
     >
       {user.name}
       {admin === user._id && <span> (Admin)</span>}
