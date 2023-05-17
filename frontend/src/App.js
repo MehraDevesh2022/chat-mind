@@ -13,7 +13,7 @@ function App() {
   const user = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
-
+ 
 
     if (!user) history.push("/");
     else history.push("/chats");
@@ -23,11 +23,10 @@ function App() {
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/">
-
+          <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route exact path="/login">
+          <Route exact path="/">
             {" "}
             <Login />
           </Route>
@@ -37,7 +36,9 @@ function App() {
             <ForgetPassowrd />
           </Route>
 
-          <Route exact path="/chats" component={Chatpage} />
+          <Route exact path="/chats">
+            <Chatpage />
+          </Route>
         </Switch>
       </Router>
     </div>

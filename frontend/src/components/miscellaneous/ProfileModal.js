@@ -13,7 +13,12 @@ import {
 
 } from "@chakra-ui/react";
 import { Flex, Avatar } from "@chakra-ui/react";
+
+
+
+
 const ProfileModal = ({ user, children }) => {
+console.log(user);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
 return (
@@ -55,10 +60,10 @@ return (
           />
           <Flex direction="column" alignItems="flex-start">
             <Text fontSize="1.2rem" mt={2}>
-              ID: 628c511114
+              ID: {user._id}
             </Text>
             <Text fontSize="1.2rem" mt={2}>
-              Created At: 05/11/2023 10:33 AM
+              Created At: {user.createdAt}
             </Text>
             <Text fontSize="1.2rem" mt={2}>
               Email: {user.email}

@@ -57,7 +57,7 @@ const submitHandler = async () => {
   formData.append("password", password);
   formData.append("pic", pic);
 
- console.log(formData)
+
   try {
     const config = {
       headers: {
@@ -88,7 +88,7 @@ const submitHandler = async () => {
      
       history.push("/chats");
     } catch (error) {
-      console.log(error.response.statusText, "error");
+    setIsLoginDisabled(false);
        toast({
          title: error.response.statusText,
          status: "error",
@@ -252,14 +252,14 @@ const submitHandler = async () => {
              <Grid item>
                <FormControlLabel
                  control={<Checkbox />}
-                 label="I Accept The Cricket Weapon Terms & Conditions"
+                 label="I Accept The ChatMind Terms & Conditions"
                  className={classes.checkbox}
                />
              </Grid>
              <Grid item>
                <FormControlLabel
                  control={<Checkbox />}
-                 label="I Accept The Cricket Weapon Terms Of Use"
+                 label="I Accept The  ChatMind Terms Of Use"
                  className={classes.checkbox}
                />
              </Grid>
@@ -269,8 +269,8 @@ const submitHandler = async () => {
              variant="body2"
              className={classes.termsAndConditionsText}
            >
-             I acknowledge Cricket Weapon will use my information in accordance
-             with its
+             I acknowledge ChatMind will use my information in accordance with
+             its
              <Link href="#" className={classes.privacyText}>
                Privacy Policy.
              </Link>
@@ -290,7 +290,7 @@ const submitHandler = async () => {
              style={{ marginTop: "1rem" }}
            >
              Already have an account?
-             <Link to="/login" className={classes.createAccount}>
+             <Link to="/" className={classes.createAccount}>
                Login
              </Link>
            </Typography>
