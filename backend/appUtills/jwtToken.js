@@ -11,13 +11,14 @@ const sendJwtToekn  = (userData  , statusCode , res) =>{
     ), // 2day
     httpOnly: true, // The 'httpOnly' flag prevents client-side access to the cookie
   };
-
+ 
     res.status(statusCode).cookie("token", Token, options).json({
       _id: userData._id,
       name: userData.name,
       email: userData.email,
       isAdmin: userData.isAdmin,
       pic: userData.pic,
+      createdAt: userData.createdAt,
     });
 
     

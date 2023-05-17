@@ -36,7 +36,9 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true,
+  
+  }
 );
 
 // " it will run berfore Schema Updates" >>>>Password hash<<<<

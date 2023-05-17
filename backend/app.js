@@ -8,6 +8,7 @@ const cloudinary = require("cloudinary");
 const errorMiddleware = require("./middleWare/errorHandler");
 const fileUpload = require("express-fileupload");
 const path = require("path");
+var cors = require("cors");
 // routes
 const userRoute = require("./route/userRoute");
 const chatRuote = require("./route/chatRoute");
@@ -30,7 +31,7 @@ app.use(errorMiddleware);
 app.use("/api/user", userRoute);
 app.use("/api/chat", chatRuote);
 app.use("/api/message", messageRoute);
-
+app.use(cors());
 // conncet with cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -40,18 +41,18 @@ cloudinary.config({
 
 // -----deployement code-----
 
-const __dirname1 = path.resolve();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+// const __dirname1 = path.resolve();
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname1, "/frontend/build")));
 
-  app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
-  );
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running..");
-  });
-}
+//   app.get("*", (req, res) =>
+//     res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+//   );
+// } else {
+//   app.get("/", (req, res) => {
+//     res.send("API is running..");
+//   });
+// }
 
 // connect to DB
 connectDB();
