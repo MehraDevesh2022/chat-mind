@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 const cloudinary = require("cloudinary");
 const errorMiddleware = require("./middleWare/errorHandler");
 const fileUpload = require("express-fileupload");
-
+const path = require("path");
 // routes
 const userRoute = require("./route/userRoute");
 const chatRuote = require("./route/chatRoute");
@@ -20,10 +20,12 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(fileUpload());
 app.use(errorMiddleware);
 
-app.use((req, res, next) => {
-  console.log(`Incoming request: ${req.method} ${req.originalUrl}`);
-  next();
-});
+
+//this is for logging the incoming request
+// app.use((req, res, next) => {
+//   console.log(`Incoming request: ${req.method} ${req.originalUrl}`);
+//   next();
+// });
 
 app.use("/api/user", userRoute);
 app.use("/api/chat", chatRuote);
@@ -36,10 +38,25 @@ cloudinary.config({
   api_secret: process.env.API_SECRET,
 });
 
+// -----deployement code-----
+
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
+
 // connect to DB
 connectDB();
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 const server = app.listen(PORT, () =>
   console.log(`Server started on port ${PORT}`)

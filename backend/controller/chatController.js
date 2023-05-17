@@ -114,8 +114,8 @@ exports.removeFromGroup  = asyncWrapper(async( req  , res  , next) =>{
 
   if (!chatId || !userId) {
     return next(new ErrorHandler("Please Fill all the feilds", 400));
-  }
-  // check if the requester is admin
+  } 
+  // check if the requester is admin or not
 
   const removed = await chatModel
     .findByIdAndUpdate(chatId, {

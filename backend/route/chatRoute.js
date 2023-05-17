@@ -15,7 +15,7 @@ router
   .post(authentication, getCreateChatController)
   .get(authentication, getAllChats);
 router.route("/group").post(authentication, createGroupChat);
-router.route("/groupremove").delete(authentication, removeFromGroup);
+router.route("/groupremove").put(authentication, removeFromGroup);
 router.route("/groupadd").put(authentication, addToGroup);
 router.route("/rename").put(authentication, renameGroup);
 module.exports = router;
