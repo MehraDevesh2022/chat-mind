@@ -164,13 +164,20 @@ ChatMind can be hosted using the Render platform. Follow these steps to deploy C
  1. Build the frontend by running the following command in the frontend directory: `npm run build`
  2.  Add the following deployment code to the `app.js` file in the backend directory:  
  
- > // -----deployment code----- 
-> const __dirname1 = path.resolve(); 
-> if (process.env.NODE_ENV === "production") { app.use(express.static(path.join(__dirname1, "/frontend/build"))); app.get("*", (req, res) => res.sendFile( path.resolve(__dirname1, "frontend", "build", "index.html") ) );
->  }
->  else {
->   app.get("/", (req, res) => { res.send("API is running..");
->    }); }
+// -----deployment code-----
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "/frontend/build")));
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname1, "frontend", "build", "index.html")
+    )
+  );
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running..");
+  });
+}
 3. Push the code to a Git repository (GitHub, GitLab, or Bitbucket).
 4. Sign up for Render and select "Web Services" from the dashboard.
 5. Choose the repository from GitHub, GitLab, or Bitbucket.
