@@ -22,7 +22,10 @@ import backgroundImage from "../img/img.jpg";
 import io from "socket.io-client";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
-const ENDPOINT = "http://localhost:5000"; // "https://talk-a-tive.herokuapp.com"; -> After deployment
+
+const ENDPOINT = window.location.hostname === "localhost"
+  ? "http://localhost:5000"
+  : "https://chat-mind-3pcx.onrender.com";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
