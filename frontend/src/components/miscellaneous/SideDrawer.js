@@ -193,9 +193,7 @@ function SideDrawer() {
                 count={notification.length}
                 effect={Effect.SCALE}
               />
-              <BellIcon fontSize="2xl" m={1} 
-           
-              />
+              <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
             <MenuList pl={2} bg="#28293D" color="white">
               {!notification.length && <MenuItem>No New Messages</MenuItem>}
@@ -228,10 +226,10 @@ function SideDrawer() {
               <Box p={2} textAlign="center">
                 <Avatar size="md" name={user.name} src={user.pic} mb={2} />
                 <Box fontSize="sm">
-                  <strong>ID:</strong> 628c511114 <br />
-                  <strong>Name:</strong> DEVESH MEHRA <br />
-                  <strong>Email:</strong> dev.mehara97@gmail.com <br />
-                  <strong>Created At:</strong> 05/11/2023 10:33 AM
+                  <strong>ID:</strong> {user._id} <br />
+                  <strong>Name:</strong> {user.name} <br />
+                  <strong>Email:</strong> {user.email} <br />
+                  <strong>Created At:</strong> {user.createdAt} <br />
                 </Box>
               </Box>
               <MenuDivider />
