@@ -164,21 +164,38 @@ ChatMind can be hosted using the Render platform. Follow these steps to deploy C
  1. Build the frontend by running the following command in the frontend directory: `npm run build`
  2.  Add the following deployment code to the `app.js` file in the backend directory:  
  
- > // -----deployment code----- 
-> const __dirname1 = path.resolve(); 
-> if (process.env.NODE_ENV === "production") { app.use(express.static(path.join(__dirname1, "/frontend/build"))); app.get("*", (req, res) => res.sendFile( path.resolve(__dirname1, "frontend", "build", "index.html") ) );
->  }
->  else {
->   app.get("/", (req, res) => { res.send("API is running..");
->    }); }
-3. Push the code to a Git repository (GitHub, GitLab, or Bitbucket).
-4. Sign up for Render and select "Web Services" from the dashboard.
-5. Choose the repository from GitHub, GitLab, or Bitbucket.
-6. Add a project name and select the runtime as Node.
-7. Set the build command to npm install or yarn install.
-8. Set the start command to node backend/app.js or npm start or yarn start.
-9. Go to the "Advanced" tab and add all the environment keys and their corresponding values from the .env file.
-10. Create the web service.
+ ```javascript 
+  // -----deployment code----- 
+
+const path = require("path");
+const __dirname1 = path.resolve(); 
+if (process.env.NODE_ENV === "production") {
+  
+   app.use(express.static(path.join(__dirname1, "/frontend/build"))); 
+   app.get("*", (req, res) => res.sendFile( path.resolve(__dirname1, "frontend", "build", "index.html") ) );
+
+ }
+ else {
+
+  app.get("/", (req, res) => { res.send("API is running..");
+
+   }); 
+   }
+
+  // -----deployment code ends-----
+  ```
+3 Push the code to a Git repository (GitHub, GitLab, or Bitbucket).
+4 Sign up for Render and select "Web Services" from the dashboard.
+5 Choose the repository from GitHub, GitLab, or Bitbucket.
+6 Add a project name and select the runtime as Node.
+7 Set the build command to npm install or yarn install.
+8 Set the start command to node backend/app.js or npm start or yarn start.
+9 Go to the "Advanced" tab and add all the environment keys and their corresponding values from the .env file.
+10 Create the web service.
+11 Once the web service is created, go to the "Overview" tab and click on the link to view the application.
+
+
+
 ## Packages Used 📦
 
 ### Server side :
@@ -229,17 +246,20 @@ ChatMind can be hosted using the Render platform. Follow these steps to deploy C
  - Dark mode
  - Audio and video calls
  - Rest password
- -  Media transfer
+ -  Media sharing
+  -  And More ....
  
  ## Raise an issue for :
  
  - -   Found a bug
  - -   Add new service
- - - For adding Upcoming Features
- - - And More ....
+ - -   For adding Upcoming Features
+ - -   For Improving Documentation
+ - -    And More ....
  
- Contribution Guidelines 🤝
- ontributions are welcome! To contribute to ChatMind, follow these steps:
+ ## Contribution Guidelines 🤝
+
+ contributions are welcome! To contribute to ChatMind, follow these steps:
  
  - Fork the repository.
  - Create a new branch.
@@ -248,9 +268,11 @@ ChatMind can be hosted using the Render platform. Follow these steps to deploy C
  - Push to the branch.
  - Open a pull request.
  
+  ## Contributors 🤝
+  @MehraDevesh2022 
  
-
 > Happy chatting with ChatMind! If you have any questions or need further assistance, feel free to reach out.
+ 
 
  
  
