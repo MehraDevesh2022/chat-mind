@@ -4,20 +4,24 @@
         {
             "src": "backend/app.js",
             "use": "@vercel/node"
-        },
-        {
-            "src": "frontend/build",
-            "use": "@vercel/static"
         }
     ],
     "routes": [
         {
-            "src": "/api/.*",
+            "src": "/api/user/.*",
+            "dest": "backend/app.js"
+        },
+        {
+            "src": "/api/chat/.*",
+            "dest": "backend/app.js"
+        },
+        {
+            "src": "/api/message/.*",
             "dest": "backend/app.js"
         },
         {
             "src": "/(.*)",
-            "dest": "frontend/build/index.html"
+            "dest": "backend/app.js"
         }
     ]
 }
