@@ -61,7 +61,7 @@ export default function ForgetPassowrd() {
           align="center"
           style={{ marginTop: ".3rem" }}
         >
-          <Link to="/login" className={classes.createAccount}>
+          <Link to="/" className={classes.createAccount}>
             Cancel
           </Link>
         </Typography>
