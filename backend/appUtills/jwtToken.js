@@ -1,9 +1,9 @@
 
 const sendJwtToekn  = (userData  , statusCode , res) =>{
-
+  
   const Token = userData.getJwtToken(); // from method userModel
 
-     console.log(process.env.COOKIE_EXPIRE);
+    //  console.log(process.env.COOKIE_EXPIRE, userData);
   // options for cookie
   const options = {
     expires: new Date(

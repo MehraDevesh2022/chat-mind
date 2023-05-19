@@ -76,26 +76,7 @@ exports.registerUser = asyncWrapper(async (req, res, next) => {
 
 
   if (user) {
-  const dateObj = new Date(user.createdAt);
-
-  const formattedDate = dateObj.toLocaleDateString("en-IN", {
-    month: "2-digit",
-    day: "2-digit",
-    year: "numeric",
-  });
-
-  const formattedTime = dateObj.toLocaleTimeString("en-IN", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
-  });
-
-  const formattedDateTime = `${formattedDate} ${formattedTime}`;
-
-
-
-   user.createdAt = formattedDateTime;
-    sendJwtToekn(user, 201, res);
+  sendJwtToekn(user, 201, res);
   } else {
     console.log("error");
     return next(new ErrorHandler("Bad request", 400));
