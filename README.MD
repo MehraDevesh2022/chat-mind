@@ -1,4 +1,4 @@
-# ChatMind
+# ChatMind - A Real-Time Chat Application
 
 ChatMind is a full stack chat application that allows users to communicate with each other in real-time. It supports features like user authentication, one-on-one chat, group chat, user profile management, and more.
 
@@ -8,10 +8,11 @@ ChatMind is a full stack chat application that allows users to communicate with 
 -   Socket.IO
 ## Table of Contents 📜
 
- ## Demo
+ ## Demo 📸
 ![Demo](./gif/demo.gif)
 
 
+## Table
 - [Intro](#intro)
 - [Sections](#sections)
 - [Installation](#installation)
@@ -23,7 +24,7 @@ ChatMind is a full stack chat application that allows users to communicate with 
 - [Upcoming Features](#upcoming-features)
 - [Contribution Guidelines](#contribution-guidelines)
 
-## Intro
+## Intro 📝
 
 ChatMind is a chat application built with the MERN stack. It provides a seamless and real-time chatting experience for users. With features like user authentication, one-on-one chat, group chat, and user profile management, ChatMind offers a comprehensive solution for communication needs.
 
@@ -42,7 +43,7 @@ ChatMind is a chat application built with the MERN stack. It provides a seamless
 
 
 
-[Add demo link here]
+
 
 ## Installation ⬇️
 
@@ -61,19 +62,30 @@ Download and install Node.js from the official website: [https://nodejs.org](htt
 To get started with ChatMind, follow these steps:
 
 1. Fork and clone the repository from GitHub:
+  
    ```bash
    git clone https://github.com/MehraDevesh2022/chat-mind.git
+    ```
+
 
  ## Install the required packages for the backend by running the following command in the root directory:
  
+    ```javascript
 
-    npm install or yarn add
+    npm install 
+    or 
+    yarn add
+    ```
+
 ## Install the required packages for the frontend by navigating to the frontend directory and running the following command:
 
+   ```javascript
     cd ./frontend 
     npm install
     or
     yarn add
+
+    ```
     
 ## Folder Structure 📂
 
@@ -145,7 +157,8 @@ To get started with ChatMind, follow these steps:
     - Homepage.css 
     - Homepage.js
 
-## Setting Up .env in Backend
+## Setting Up .env in Backend 🔧
+
 To set up the environment variables for the backend, create a `.env` file inside the `backend/utils` directory with the following contents:
 
 ```bash
@@ -163,7 +176,7 @@ CLOUDINARY_URL=xxxx
 
 ```
 
-  Make sure to replace `xxxx` with your actual values.
+ - Make sure to replace `xxxx` with your actual values. 
 
 ## Hosting 🌐
 ChatMind can be hosted using the Render platform. Follow these steps to deploy ChatMind:  [https://chat-mind-3pcx.onrender.com/](https://chat-mind-3pcx.onrender.com/)
@@ -220,7 +233,7 @@ if (process.env.NODE_ENV === "production") {
 | nodemailer           | Library for sending emails                                  |
 | cloudinary           | Cloud-based image and video management platform             |
 
-### Clint-side
+### Clint-side : 
 
 | Dependency                    | Description                                                     |
 |-------------------------------|-----------------------------------------------------------------|
@@ -255,7 +268,7 @@ if (process.env.NODE_ENV === "production") {
  -  Media sharing
   -  And More ....
  
- ## Raise an issue for :
+ ## Raise an issue for 📝
  
  - -   Found a bug
  - -   Add new service
