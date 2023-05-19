@@ -8,9 +8,12 @@ ChatMind is a full stack chat application that allows users to communicate with 
 -   Socket.IO
 ## Table of Contents 📜
 
+ ## Demo
+![Demo](./gif/demo.gif)
+
+
 - [Intro](#intro)
 - [Sections](#sections)
-- [Demo](#demo)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Folder Structure](#folder-structure)
@@ -37,7 +40,7 @@ ChatMind is a chat application built with the MERN stack. It provides a seamless
   - User Profile
   - Group Menu
 
-## Demo
+
 
 [Add demo link here]
 
@@ -145,7 +148,9 @@ To get started with ChatMind, follow these steps:
 ## Setting Up .env in Backend
 To set up the environment variables for the backend, create a `.env` file inside the `backend/utils` directory with the following contents:
 
-> PORT=5000
+```bash
+
+PORT=5000
 DB_LINK=xxxx
 JWT_SECRET=xxxx
 JWT_EXPIRE=2d
@@ -155,6 +160,8 @@ CLOUDINARY_NAME=xxxx
 API_KEY=xxxx
 API_SECRET=xxxx
 CLOUDINARY_URL=xxxx
+
+```
 
   Make sure to replace `xxxx` with your actual values.
 
