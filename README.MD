@@ -195,32 +195,6 @@ if (process.env.NODE_ENV === "production") {
 10 Create the web service.
 11 Once the web service is created, go to the "Overview" tab and click on the link to view the application.
 
-
-
-=======
-// -----deployment code-----
-const __dirname1 = path.resolve();
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname1, "/frontend/build")));
-  app.get("*", (req, res) =>
-    res.sendFile(
-      path.resolve(__dirname1, "frontend", "build", "index.html")
-    )
-  );
-} else {
-  app.get("/", (req, res) => {
-    res.send("API is running..");
-  });
-}
-3. Push the code to a Git repository (GitHub, GitLab, or Bitbucket).
-4. Sign up for Render and select "Web Services" from the dashboard.
-5. Choose the repository from GitHub, GitLab, or Bitbucket.
-6. Add a project name and select the runtime as Node.
-7. Set the build command to npm install or yarn install.
-8. Set the start command to node backend/app.js or npm start or yarn start.
-9. Go to the "Advanced" tab and add all the environment keys and their corresponding values from the .env file.
-10. Create the web service.
->>>>>>> 6ca6c3c84bb993c6246eca2c4998ab5473e5714e
 ## Packages Used 📦
 
 ### Server side :
