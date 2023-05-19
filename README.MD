@@ -70,22 +70,36 @@ To get started with ChatMind, follow these steps:
 
  ## Install the required packages for the backend by running the following command in the root directory:
  
-    ```javascript
+   
 
     npm install 
     or 
     yarn add
-    ```
+  
 
 ## Install the required packages for the frontend by navigating to the frontend directory and running the following command:
 
-   ```javascript
+  
     cd ./frontend 
     npm install
     or
     yarn add
 
-    ```
+## Run the backend server by running the following command in the root directory:
+  
+      npm start
+      or
+      yarn start
+
+## Run the frontend server by navigating to the frontend directory and running the following command:
+    
+        cd ./frontend
+        npm start
+        or
+        yarn start
+
+
+        
     
 ## Folder Structure 📂
 
