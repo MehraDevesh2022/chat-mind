@@ -13,7 +13,7 @@ import {
 
 } from "@chakra-ui/react";
 import { Flex, Avatar } from "@chakra-ui/react";
-
+import { createdAt } from "../../config/ChatLogics";
 
 
 
@@ -60,10 +60,10 @@ return (
           />
           <Flex direction="column" alignItems="flex-start">
             <Text fontSize="1.2rem" mt={2}>
-              ID: {user._id}
+              ID: {user._id.toString().substring(0, 9)}
             </Text>
             <Text fontSize="1.2rem" mt={2}>
-              Created At: {user.createdAt}
+              Created At: {createdAt(user)}
             </Text>
             <Text fontSize="1.2rem" mt={2}>
               Email: {user.email}

@@ -30,6 +30,7 @@ import ProfileModal from "./ProfileModal";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
 import { getSender } from "../../config/ChatLogics";
+import { createdAt } from "../../config/ChatLogics";
 import UserListItem from "../userAvatar/UserListItem";
 import { ChatState } from "../../Context/ChatProvider";
 
@@ -46,7 +47,10 @@ function SideDrawer() {
     setNotification,
     chats,
     setChats,
+    setIsAuth,
   } = ChatState();
+
+  
 
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -54,6 +58,7 @@ function SideDrawer() {
 
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
+    setIsAuth(false);
     history.push("/");
   };
 
@@ -79,7 +84,7 @@ function SideDrawer() {
       };
 
       const { data } = await axios.get(`/api/user?search=${search}`, config);
-     console.log(data , "data") ;
+;
       setLoading(false);
       setSearchResult(data);
     } catch (error) {
@@ -96,7 +101,7 @@ function SideDrawer() {
 
    // handle the access chat function 
   const accessChat = async (userId) => {
-    console.log(userId);
+ 
 
     try {
       setLoadingChat(true);
@@ -107,7 +112,6 @@ function SideDrawer() {
       };
       const { data } = await axios.post(`/api/chat`, { userId }, config);
 
-      console.log(data);
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat(data);
       setLoadingChat(false);
@@ -226,10 +230,10 @@ function SideDrawer() {
               <Box p={2} textAlign="center">
                 <Avatar size="md" name={user.name} src={user.pic} mb={2} />
                 <Box fontSize="sm">
-                  <strong>ID:</strong> {user._id} <br />
+                  <strong>ID:</strong> {user._id.toString().substring(0 ,8)} <br />
                   <strong>Name:</strong> {user.name} <br />
                   <strong>Email:</strong> {user.email} <br />
-                  <strong>Created At:</strong> {user.createdAt} <br />
+                  <strong>Created At:</strong> {createdAt(user)} <br />
                 </Box>
               </Box>
               <MenuDivider />

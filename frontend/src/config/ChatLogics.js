@@ -45,3 +45,23 @@ export const getSender = (loggedUser, users) => {
 export const getSenderFull = (loggedUser, users) => {
   return users[0]._id === loggedUser._id ? users[1] : users[0];
 };
+
+
+
+export const createdAt = (user) => {
+const createdAt = new Date(user.createdAt);
+const options = {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: true,
+  timeZone: "Asia/Kolkata",
+};
+
+const formatter = new Intl.DateTimeFormat("en-IN", options);
+const formattedDate = formatter.format(createdAt);
+return formattedDate;
+  
+}
