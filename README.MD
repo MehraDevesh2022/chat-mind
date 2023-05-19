@@ -171,7 +171,7 @@ ChatMind can be hosted using the Render platform. Follow these steps to deploy C
  1. Build the frontend by running the following command in the frontend directory: `npm run build`
  2.  Add the following deployment code to the `app.js` file in the backend directory:  
  
-<<<<<<< HEAD
+
  ```javascript 
   // -----deployment code----- 
 
