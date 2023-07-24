@@ -55,3 +55,35 @@ box-shadow: 0px 0.5px 4px 0px #00000052 inset;
 .navbar-item:hover {
   transform: scale(1.1);
 }
+
+
+@media (max-width: 699px) {
+  .navbar-container {
+    padding: 5px 10px; /* Reduce padding for smaller container */
+  }
+
+  .navbar-logo {
+    font-size: 2rem; /* Decrease the font size for the logo */
+  }
+
+  .navbar-item {
+    font-size: 14px; /* Decrease the font size for the menu items */
+    padding: 8px 15px; /* Reduce padding for smaller items */
+  }
+}
+
+/* Media query for screen sizes between 340px and 499px */
+@media (min-width: 340px) and (max-width: 499px) {
+  .navbar-container {
+    padding: 2px 5px; /* Further reduce padding for smaller container */
+  }
+
+  .navbar-logo {
+    font-size: 1.5rem; /* Further decrease the font size for the logo */
+  }
+
+  .navbar-item {
+    font-size: 12px; /* Further decrease the font size for the menu items */
+    padding: 5px 10px; /* Reduce padding even more for smaller items */
+  }
+}

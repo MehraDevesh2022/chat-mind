@@ -1,48 +1,37 @@
-import "./App.css";
 import React, { useEffect } from "react";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Chatpage from "./Pages/Chatpage";
-import { useHistory } from "react-router";
-import Signup from "./components/Authentication/Signup";
-import Login from "./components/Authentication/Login";
-import ForgetPassowrd from "./components/Authentication/ForgotPassword";
+import Loader from "./components/layouts/Loader";
+ import { useHistory } from "react-router-dom";
+const Chatpage = React.lazy(() => import("./Pages/Chatpage"));
+const Signup = React.lazy(() => import("./components/Authentication/Signup"));
+const Login = React.lazy(() => import("./components/Authentication/Login"));
+const ForgetPassowrd = React.lazy(() =>
+  import("./components/Authentication/ForgotPassword")
+);
 
 function App() {
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
- 
-
     if (!user) history.push("/");
     else history.push("/chats");
   }, [history, user]);
 
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/">
-            {" "}
-            <Login />
-          </Route>
-
-          <Route exact path="/forgot/password">
-            {" "}
-            <ForgetPassowrd />
-          </Route>
-
-          <Route exact path="/chats">
-            <Chatpage />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
-  );
+   return (
+     <div className="App">
+       <Router>
+         <React.Suspense fallback={<Loader/>}>
+           <Switch>
+             <Route exact path="/signup" component={Signup} />
+             <Route exact path="/" component={Login} />
+             <Route exact path="/forgot/password" component={ForgetPassowrd} />
+             <Route exact path="/chats" component={Chatpage} />
+           </Switch>
+         </React.Suspense>
+       </Router>
+     </div>
+   );
 }
 
 export default App;
