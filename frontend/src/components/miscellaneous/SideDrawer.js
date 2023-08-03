@@ -178,6 +178,7 @@ function SideDrawer() {
         </Tooltip>
 
         <Text
+        className ="logo_text"
           fontSize="2.5rem"
           fontWeight="bold"
           textTransform="uppercase"
@@ -265,6 +266,7 @@ function SideDrawer() {
         <DrawerOverlay />
         <DrawerContent bg="#28293D" color="#28293D">
           <DrawerHeader
+        
             borderBottomWidth="1px"
             fontWeight="bold"
             textTransform="uppercase"

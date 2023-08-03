@@ -60,10 +60,23 @@ box-shadow: 0px 0.5px 4px 0px #00000052 inset;
 @media (max-width: 699px) {
   .navbar-container {
     padding: 5px 10px; /* Reduce padding for smaller container */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
+
+
+  .navbar-menu{
+    display: none;
+  }
+  .navbar-item {
+    font-size: 12px;
+    padding: 5px 10px; 
+  }
   .navbar-logo {
     font-size: 2rem; /* Decrease the font size for the logo */
+  /* margin-left: 8rem; */
   }
 
   .navbar-item {
@@ -80,10 +93,13 @@ box-shadow: 0px 0.5px 4px 0px #00000052 inset;
 
   .navbar-logo {
     font-size: 1.5rem; /* Further decrease the font size for the logo */
+
+
   }
 
-  .navbar-item {
-    font-size: 12px; /* Further decrease the font size for the menu items */
-    padding: 5px 10px; /* Reduce padding even more for smaller items */
+  .navbar-menu {
+   display: none;
   }
+
+ 
 }

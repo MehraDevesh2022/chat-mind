@@ -13,7 +13,7 @@ font-family: sans-serif ;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(136, 136, 136, 0.281);
+  background: rgba(136, 136, 136, 0.281) ;
 }
 
 /* Handle on hover */

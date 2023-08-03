@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "3rem",
     height: "auto",
     color: "#F2F2F5",
+    [theme.breakpoints.down(499)]: {
+      width: "100%",
+    },
   },
   form: {
     margin: "auto",
@@ -16,6 +19,12 @@ const useStyles = makeStyles((theme) => ({
     padding: "2rem",
     width: "70vmin",
     color: "#F2F2F5",
+    [theme.breakpoints.down(699)]: {
+      width: "80%",
+    },
+    [theme.breakpoints.down(499)]: {
+      width: "93%",
+    },
   },
 
   heading: {
@@ -23,6 +32,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(3),
     color: "#F2F2F5",
     fontWeight: 800,
+    [theme.breakpoints.down(699)]: {
+      fontSize: "1.3rem",
+    },
+
+    [theme.breakpoints.down(499)]: {
+      fontSize: "1rem",
+    },
   },
   nameInput: {
     position: "relative",

@@ -8,11 +8,13 @@
 .css-4g3h2a{
 background: linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%) !important;
   position: absolute !important ;
-    top: 100px !important;
-    right: 10rem !important;
+    top: 105px !important;
+    right: 13rem !important;
     /* margin-left: 1rem; */
     /* border-bottom-left-radius: 20px !important; */
 }
+
+
 
 .css-4g3h2a:hover{
   background: #6600CC !important;
@@ -55,4 +57,28 @@ background: linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%) !important
 .css-1hbeen3:hover{
   background: #6600CC !important;
   transform: scale(1.1) !important;
+}
+
+@media(min-width : 330px) and (max-width : 499px){
+
+.heading {
+  font-size: 1.2rem !important;
+  margin: 0.5rem 0 !important;;   
+}
+
+.chatBtn{
+  font-size: 1rem !important;
+  padding: 0.3rem   !important;
+}
+
+ .modal {
+    width: 90% !important;
+    padding: 0.5rem !important;
+  }
+
+  .css-4g3h2a {
+    top: 83px !important;
+    right: 13rem !important;
+  }
+
 }

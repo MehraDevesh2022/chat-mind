@@ -1,24 +1,66 @@
-.css-390oqs:hover{
- background-color: #555770 !important;
+.css-390oqs:hover {
+  background-color: #555770 !important;
 }
 
-.css-1ubylsq{
-   border-bottom: 5px solid #555770 !important;
-  margin-bottom: 10px !important;   
+.css-1ubylsq {
+  border-bottom: 5px solid #555770 !important;
+  margin-bottom: 10px !important;
 }
 
- .css-q77qzj{
-        position: absolute !important ;
-    top: 0px !important;
-    right: 0px !important;
-    background: #E53535 !important;
-    border-bottom-left-radius: 20px !important;
+.css-q77qzj {
+  position: absolute !important ;
+  top: 0px !important;
+  right: 0px !important;
+  background: #e53535 !important;
+  border-bottom-left-radius: 20px !important;
 }
-.css-1j34oqa:hover{
+.css-1j34oqa:hover {
   transform: scale(1.1) !important;
-  color: #6600CC !important;
+  color: #6600cc !important;
 }
+@media (min-width: 330px) and (max-width: 499px) {
+  .modal {
+    width: 90% !important;
+    padding: 0.5rem !important;
+  }
 
+  .modalHeader {
+    font-size: 1rem !important;
+    padding: 0.5rem !important;
+  }
 
+  .css-1mhdemm {
+    width: 92%;
+  }
 
+  .profileModel {
+    flex-direction: column !important;
+  }
 
+  .css-1mhdemm {
+    width: 92% !important;
+  }
+
+  .css-mzkcjg {
+    font-size: 1.2rem !important;
+    margin-left: 1rem;
+  }
+  .css-xl71ch .css-70xrr {
+    font-size: 14px !important;
+  }
+  .css-1dwf119 {
+    width: 3.5rem;
+  }
+  .css-1wdvq8d {
+    width: 95%;
+  }
+  .css-1r1bh32 {
+    font-size: 1rem;
+  }
+  .css-1ocydd4 {
+    width: 5rem;
+    margin-left: 10px;
+    padding: 0 18px;
+  }
+  
+}

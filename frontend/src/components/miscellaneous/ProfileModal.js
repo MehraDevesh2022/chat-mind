@@ -14,11 +14,11 @@ import {
 } from "@chakra-ui/react";
 import { Flex, Avatar } from "@chakra-ui/react";
 import { createdAt } from "../../config/ChatLogics";
-
+import "./SideDrawer.css";
 
 
 const ProfileModal = ({ user, children }) => {
-console.log(user);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
 return (
@@ -48,7 +48,7 @@ return (
         pb={4}
       >
         <ModalCloseButton color="#F2F2F5" pos="absolute" top={4} right={4} />
-        <ModalBody d="flex" alignItems="center" justifyContent="center">
+        <ModalBody d="flex" alignItems="center" justifyContent="center" className="profileModel">
           <Avatar
             size="xl"
             borderRadius="lg"

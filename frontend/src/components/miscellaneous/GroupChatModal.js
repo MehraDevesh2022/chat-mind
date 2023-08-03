@@ -18,7 +18,7 @@ import { useState } from "react";
 import { ChatState } from "../../Context/ChatProvider";
 import UserBadgeItem from "../userAvatar/UserBadgeItem";
 import UserListItem from "../userAvatar/UserListItem";
-
+import "./SideDrawer.css";
 const GroupChatModal = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [groupChatName, setGroupChatName] = useState();
@@ -139,7 +139,9 @@ const GroupChatModal = ({ children }) => {
     <>
       <span onClick={onOpen}>{children}</span>
 
-      <Modal onClose={onClose} isOpen={isOpen} isCentered>
+      <Modal onClose={onClose} isOpen={isOpen} isCentered
+      className="modal"
+      >
         <ModalOverlay />
         <ModalContent bg="#28293D">
           <ModalHeader
@@ -154,6 +156,7 @@ const GroupChatModal = ({ children }) => {
             borderRadius="md"
             textShadow="2px 2px 8px rgba(0, 0, 0, 0.6)"
             boxShadow="2px 2px 4px rgba(0, 0, 0, 0.5)"
+            className="modalHeader"
           >
             Create Group Chat
           </ModalHeader>
