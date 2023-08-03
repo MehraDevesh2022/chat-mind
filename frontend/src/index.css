@@ -7,10 +7,71 @@ body {
   -moz-osx-font-smoothing: grayscale;
     background-color: #1C1C28 !important;
   color: #f5f5f5 ;
+  
 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+
+
+}
+
+
+.css-w67msb {
+     color : #F2F2F5 !important;
+ background: linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%) !important;
+     top: 6.2rem !important;
+    right: 2rem !important;
+}
+.css-w67msb:hover{
+  background: #FF3B3B !important;
+  transform: scale(1.1) !important;
+}
+.css-1iqbypn {
+  background-color: #FF3B3B !important;
+  color: #F2F2F5 !important;
+}
+.css-1iqbypn:hover{
+  transform: scale(1.1) !important;
+}
+
+.css-5d4acv {
+       color : #F2F2F5 !important;
+ background: linear-gradient(147.14deg, #FF3B3B 6.95%, #6600CC 93.05%) !important;
+}
+.css-5d4acv:hover{
+  background: #FF3B3B !important;
+  transform: scale(1.1) !important;
+}
+
+
+@media(min-width : 499px) and (max-width : 799px){
+  .css-w67msb {
+   margin-top: 0.2rem !important;
+    margin-right: 12rem !important;
+  }
+}
+
+@media(min-width : 330px) and (max-width : 499px){
+  .css-w67msb {
+        top: 5.2rem !important;
+    right: 17rem !important;
+  }
+
+
+ }
+
+
+ ::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #1C1C28;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1C1C28;
 }
