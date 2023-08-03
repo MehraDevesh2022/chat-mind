@@ -192,6 +192,39 @@ CLOUDINARY_URL=xxxx
 
  - Make sure to replace `xxxx` with your actual values. 
 
+## Hosting 🌐 at Railway.
+
+1. Go to [https://railway.app/](https://railway.app/).
+   - This is the Railway platform where you can host your applications.
+
+2. Log in using your GitHub account.
+   - Click on the login option and authenticate with your GitHub credentials.
+
+3. Start a New Project.
+   - Once you are logged in, click on "Start a New Project."
+
+4. Add your GitHub repository.
+   - Choose the repository of your MERN stack app that you want to deploy.
+
+5. Deploy your app.
+   - After adding the repository, select the repository you want to deploy.
+
+6. Configure environment variables.
+   - If your app requires environment variables (such as API keys, database credentials, etc.), navigate to the variables section and enter them there.
+
+7. Paste the `.env` file content.
+   - If your app uses an `.env` file locally, copy and paste its contents into the Railway platform's environment variable section.
+
+8. Generate the domain.
+   - Go to the settings and generate a domain for your deployed app.
+
+9. You're all set to go!
+   - Your MERN stack app is now deployed and accessible using the generated domain.
+
+- **Railway Platform**: [https://chat-mind-production.up.railway.app/signup)
+
+
+
 ## Hosting 🌐
 ChatMind can be hosted using the Render platform. Follow these steps to deploy ChatMind:  [https://chat-mind-3pcx.onrender.com/](https://chat-mind-3pcx.onrender.com/)
 
