@@ -25,7 +25,7 @@ import { ChatState } from "../Context/ChatProvider";
 
 const ENDPOINT = window.location.hostname === "localhost"
   ? "http://localhost:5000"
-  : "https://chat-mind-3pcx.onrender.com";
+  : "https://chat-mind-production.up.railway.app/";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {

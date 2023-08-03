@@ -186,7 +186,7 @@ const GroupChatModal = ({ children }) => {
                 }}
                 onChange={(e) => handleSearch(e.target.value)}
               />
-            </FormControl>
+            </FormControl>  
             <Box w="100%" d="flex" flexWrap="wrap">
               {selectedUsers.map((u) => (
                 <UserBadgeItem
