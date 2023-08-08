@@ -336,11 +336,16 @@ if (process.env.NODE_ENV === "production") {
  
   ## Contributors 🤝
   @MehraDevesh2022 
+
  
 > Happy chatting with ChatMind! If you have any questions or need further assistance, feel free to reach out.
  
 
+ --- 
  
+ <p align="center">
+<a href="https://wakatime.com/badge/user/f7838f29-ea5b-42c9-a473-628c7d8bc934/project/27f6a565-9c39-4922-8a4e-343c26e814d4"><img src="https://wakatime.com/badge/user/f7838f29-ea5b-42c9-a473-628c7d8bc934/project/27f6a565-9c39-4922-8a4e-343c26e814d4.svg" alt="wakatime"></a>
+</p>
  
 
   
