@@ -1,6 +1,11 @@
-# ChatMind - A Real-Time Chat Application
+# ChatMind - A Real-Time Chat Webapp.
 ---
+
 ChatMind is a full stack chat application that allows users to communicate with each other in real-time. It supports features like user authentication, one-on-one chat, group chat, user profile management, and more.
+
+### If you find this project helpful, please consider giving it a star ⭐ and follow me on [GitHub](https://github.com/MehraDevesh2022) && [X](https://twitter.com/Iam_DEv22) for more exciting projects like this! 🚀
+
+---
  
 ### ⚙️ &nbsp; Time Taken in Completion of Project : 
 ---
@@ -10,8 +15,15 @@ ChatMind is a full stack chat application that allows users to communicate with 
  
 **Tech Stack:**
 
--   MERN (MongoDB, Express.js, React, Node.js)
--   Socket.IO
+[![MERN Stack](https://img.shields.io/badge/Stack-MERN-61DAFB?style=flat-square)](https://en.wikipedia.org/wiki/MERN_(software_bundle))
+[![MongoDB](https://img.shields.io/badge/Database-MongoDB-47A248?style=flat-square)](https://www.mongodb.com/)
+[![Express.js](https://img.shields.io/badge/Backend-Express.js-000000?style=flat-square)](https://expressjs.com/)
+[![React](https://img.shields.io/badge/Frontend-React-61DAFB?style=flat-square)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Backend-Node.js-339933?style=flat-square)](https://nodejs.org/)
+[![Chakra UI](https://img.shields.io/badge/UI%20Framework-Chakra%20UI-319795?style=flat-square)](https://chakra-ui.com/)
+[![CSS3](https://img.shields.io/badge/Styling-CSS3-1572B6?style=flat-square)](https://www.w3.org/Style/CSS/Overview.en.html)
+[![Socket.IO](https://img.shields.io/badge/Web%20Sockets-Socket.IO-010101?style=flat-square)](https://socket.io/)
+
 ## Table of Contents 📜
 
  ## Demo 📸
