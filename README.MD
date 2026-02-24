@@ -19,7 +19,7 @@ ChatMind is a full stack chat application that allows users to communicate with 
 
 
 ## Table
-- [Intro](#intro)
+- [Intro](#intro) 
 - [Sections](#sections)
 - [Installation](#installation)
 - [Getting Started](#getting-started)
